@@ -21,5 +21,12 @@ Route::get('/', function () {
 
 
 Route::get('/success', function (Request $request) {
-    return $request->all();
+    $code = $request->get('code');
+
+    $url = "https://id.twitch.tv/oauth2/token?client_id=usgzw5f481gonmhmlwkm93gifo0d6t&client_secret=myliycybvs3vmtrq5mqcucfxgqe3l4&code=".$code."&grant_type=authorization_code&redirect_uri=https://twitchapi.clustermx.com/success"
+
+    return Redirect::to($url);
+
+
+
 });
