@@ -29,8 +29,8 @@
     <p>Codigo: {{ $code }}</p>
     <form action="https://id.twitch.tv/oauth2/token" method="post">
         {{-- @csrf --}}
-        <input type="hidden" name="client_id" value="{{ app('TWITCH_CLIENT_ID') }}">
-        <input type="hidden" name="client_secret" value="{{ app('TWITCH_CLIENT_SECRET') }}">
+        <input type="hidden" name="client_id" value="usgzw5f481gonmhmlwkm93gifo0d6t">
+        <input type="hidden" name="client_secret" value="h5gux7o0jhxrx81n64gnt0cjue67cs">
         <input type="hidden" name="code" value="{{ $code }}">
         <input type="hidden" name="grant_type" value="authorization_code">
         <input type="hidden" name="redirect_uri" value="https://twitchapi.clustermx.com/success">
