@@ -20,17 +20,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('/token', function (Request $request) {
-    $code = $request->get('code');
-    $url = env('TWITCH_REDIRECT_URI')."/token?code=".$code;
 
-
-
-    return Redirect::to($url);
-
-});
-
-Route::get('/success', function (Request $request) {
+//Envia los datos para generar el codigo y solicitar los permisos para la información de twitch
+Route::post('/success', function (Request $request) {
 
     $code = $request->get('code');
     $url = "https://id.twitch.tv/oauth2/token?client_id=".env('TWITCH_CLIENT_ID')."&client_secret=".env('TWITCH_CLIENT_SECRET')."&code=".$code."&grant_type=authorization_code&redirect_uri=".env('TWITCH_REDIRECT_URI');
@@ -39,3 +31,14 @@ Route::get('/success', function (Request $request) {
 
     return Redirect::to($url);
 });
+
+
+//Se obtiene el codigo generado
+Route::get('/token', function (Request $request) {
+    $code = $request->get('code');
+    $url = env('TWITCH_REDIRECT_URI')."/token?code=".$code;
+
+    return Redirect::to($url);
+
+});
+
