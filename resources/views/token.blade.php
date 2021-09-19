@@ -22,10 +22,6 @@
 <body>
 
 
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus pariatur fugiat natus mollitia quasi impedit repellendus dolor illo quaerat. Quia quo atque provident aliquam culpa, quidem deserunt perspiciatis! Magni?
-
-
-
     <p>Codigo: {{ $code }}</p>
     <form action="https://id.twitch.tv/oauth2/token" method="post">
         {{-- @csrf --}}

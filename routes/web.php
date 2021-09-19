@@ -28,7 +28,7 @@ Route::get('/success', function (Request $request) {
     $code = $request->get('code');
     // $url = "https://id.twitch.tv/oauth2/token?client_id=".env('TWITCH_CLIENT_ID')."&client_secret=".env('TWITCH_CLIENT_SECRET')."&code=".$code."&grant_type=authorization_code&redirect_uri=".env('TWITCH_REDIRECT_URI')."/token";
 
-    //return $url;
+    return $code;
 
     // return Redirect::to($url);
     return view('token',compact('code'));
