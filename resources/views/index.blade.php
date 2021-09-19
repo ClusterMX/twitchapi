@@ -27,7 +27,7 @@
     </style>
 
     <form action="https://id.twitch.tv/oauth2/authorize?client_id={{ env('TWITCH_CLIENT_ID') }}&redirect_uri={{ env('TWITCH_REDIRECT_URI') }}/success/&response_type=code&scope=channel:read:subscriptions" method="post">
-        @csrf
+        {{-- @csrf --}}
         <button class="ui twitch button">
             <i class="twitch icon"></i> Connect with Twitch
         </button>
