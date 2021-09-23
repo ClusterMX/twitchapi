@@ -35,7 +35,7 @@ Route::get('/success', function (Request $request) {
 
     $urlencode = urlencode($url);
 
-    $json = json_decode($file_get_contents($urlencode), true);
+    $json = json_decode(file_get_contents($urlencode), true);
 
     dd($json);
 });
