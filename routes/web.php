@@ -33,11 +33,9 @@ Route::get('/success', function (Request $request) {
     // return Redirect::to($url);
     // return view('token',compact('code_twitch'));
 
-    $urlencode = urlencode($url);
 
-    $json = json_decode(file_get_contents($urlencode), true);
 
-    dd($json);
+    dd($url);
 });
 
 
