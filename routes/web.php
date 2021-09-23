@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
+use GuzzleHttp\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +46,10 @@ Route::get('/success', function (Request $request) {
 
     //  return $this->makeAppiCall($apiParam);
 
-    $client = new GuzzleHttp\Client();
+    $client = new Client();
     $res = $client->post($url);
 
-    return $res;
+    return json_decode($res->getBoddy()->getContents());
 
     // return $code_twitch;
 
@@ -58,7 +58,7 @@ Route::get('/success', function (Request $request) {
 
 
 
-    dd($url);
+    // dd($url);
 });
 
 
