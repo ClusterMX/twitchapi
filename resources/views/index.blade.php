@@ -40,15 +40,21 @@
 
 
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('#connect-with-twitch').click(function(e) {
             e.preventDefault();
 
-            ga('send', 'event', 'firstLogin', 'click', 'twitch', '1');
+            // ga('send', 'event', 'firstLogin', 'click', 'twitch', '1');
 
-            window.location =
-                "https://id.twitch.tv/oauth2/authorize?client_id="+{{ env('TWITCH_CLIENT_ID') }}+"&redirect_uri="+{{ env('TWITCH_REDIRECT_URI') }}+"/success&response_type=code&scope=channel:read:subscriptions";
+            var client_id = "{{ env('TWITCH_CLIENT_ID') }}";
+            var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
+
+
+            window.location = "https://id.twitch.tv/oauth2/authorize?client_id="+client_id+"&redirect_uri="+redirect+"/success&response_type=code&scope=channel:read:subscriptions";
         });
+
     </script>
 </body>
 
