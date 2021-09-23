@@ -49,7 +49,7 @@ Route::get('/success', function (Request $request) {
     $client = new Client();
     $res = $client->post($url);
 
-    return json_decode($res->getBoddy()->getContents());
+    return json_decode($res->getBody()->getContents());
 
     // return $code_twitch;
 
