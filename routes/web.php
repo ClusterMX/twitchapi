@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 
 
+
+
 //Envia los datos para generar el codigo y solicitar los permisos para la información de twitch
 Route::get('/success', function (Request $request) {
 
@@ -47,7 +49,7 @@ Route::get('/success', function (Request $request) {
     $client = new GuzzleHttp\Client();
     $res = $client->post($url);
 
-    return $res->getBody();
+    return $res->getBody()->access_token;
 
     // return $code_twitch;
 
