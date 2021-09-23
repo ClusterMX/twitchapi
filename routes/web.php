@@ -45,7 +45,7 @@ Route::get('/success', function (Request $request) {
     //  return $this->makeAppiCall($apiParam);
 
     $client = new GuzzleHttp\Client();
-    $res = $client->get($url);
+    $res = $client->post($url);
 
     return $res->getBody();
 
