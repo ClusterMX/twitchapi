@@ -49,7 +49,7 @@ Route::get('/success', function (Request $request) {
     $client = new GuzzleHttp\Client();
     $res = $client->post($url);
 
-    return $res->getBody()->access_token;
+    return $res;
 
     // return $code_twitch;
 
