@@ -48,11 +48,9 @@ Route::get('/success', function (Request $request) {
 
     $user_id = $datosUsuario->user_id;
 
-    return $user_id;
-
 
     //Se obtienen los datos de los subs
-    $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
+    $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=".$user_id;
 
     $res = $client->get($subs, [
         'headers' => [
