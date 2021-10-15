@@ -46,7 +46,7 @@ Route::get('/success', function (Request $request) {
 
     $datosUsuario = json_decode($u->getBody()->getContents());
 
-    $user_id = $datosUsuario->user->id;
+    $user_id = $datosUsuario->user_id;
 
     return $user_id;
 
