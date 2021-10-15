@@ -74,7 +74,7 @@ Route::get('/success', function (Request $request) {
 //Se obtiene el codigo generado
 Route::get('/board', function (Request $request) {
 
-    return $request->all();
+    return $request->get('user_name');
 
 })->name('board');
 
