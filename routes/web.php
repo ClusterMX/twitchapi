@@ -50,8 +50,8 @@ Route::get('/success', function (Request $request) {
     // $data = $client->get($url, $headers);
     // $datosSubs = json_decode($data->getBody()->getContents());
 
-    return $token;
 
+    return redirect()->route('datos', ['token' => $token]);
     // return $code_twitch;
 
     // return Redirect::to($url);
@@ -66,25 +66,29 @@ Route::get('/success', function (Request $request) {
 //Se obtiene el codigo generado
 Route::get('/datos', function (Request $request) {
 
+    return $request->all();
+
     $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
 
     $client = new Client();
-    $res = $client->post($url);
+
+    $headers = [
+        'Authorization' => 'Bearer ' . $token,
+        'Client-Id'        => env('TWITCH_CLIENT_ID'),
+    ];
+
+
+    $res = $client->post($subs);
 
     $datos = json_decode($res->getBody()->getContents());
 
 
-    $token = $datos->access_token;
 
-    return $token;
+    return $datos->access_token;
 
 
-    $headers = [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept'        => 'application/json',
-    ];
 
-    return $request->all();
 
-});
+
+})->name('datos');
 
