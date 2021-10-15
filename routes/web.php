@@ -66,7 +66,6 @@ Route::get('/success', function (Request $request) {
 //Se obtiene el codigo generado
 Route::get('/datos', function (Request $request) {
 
-    return $request->all();
 
     $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
 
@@ -78,13 +77,13 @@ Route::get('/datos', function (Request $request) {
     ];
 
 
-    $res = $client->post($subs);
+    $res = $client->post($subs, $headers);
 
     $datos = json_decode($res->getBody()->getContents());
 
 
 
-    return $datos->access_token;
+    return $datos;
 
 
 
