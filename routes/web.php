@@ -79,7 +79,7 @@ Route::get('/datos', function (Request $request) {
     ];
 
 
-    $res = $client->post($subs, $headers);
+    $res = $client->get($subs, $headers);
 
     $datos = json_decode($res->getBody()->getContents());
 
