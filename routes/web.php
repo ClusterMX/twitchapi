@@ -44,7 +44,9 @@ Route::get('/success', function (Request $request) {
         ],
     ]);
 
-    return $u;
+    $datosUsuario = json_decode($u->getBody()->getContents());
+
+    return $datosUsuario;
 
 
     //Se obtienen los datos de los subs
