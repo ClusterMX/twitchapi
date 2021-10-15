@@ -79,7 +79,12 @@ Route::get('/datos', function (Request $request) {
     ];
 
 
-    $res = $client->get($subs, $headers);
+    $res = $client->get($subs, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+            'Client-Id'        => env('TWITCH_CLIENT_ID'),
+        ],
+    ]);
 
     $datos = json_decode($res->getBody()->getContents());
 
