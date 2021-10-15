@@ -31,7 +31,7 @@ Route::get('/success', function (Request $request) {
     $url = "https://id.twitch.tv/oauth2/token?client_id=".env('TWITCH_CLIENT_ID')."&client_secret=".env('TWITCH_CLIENT_SECRET')."&code=".$code_twitch."&grant_type=authorization_code&redirect_uri=".env('TWITCH_REDIRECT_URI')."/token";
 
 
-    $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
+
 
 
     $client = new Client();
@@ -65,10 +65,19 @@ Route::get('/success', function (Request $request) {
 
 //Se obtiene el codigo generado
 Route::get('/datos', function (Request $request) {
-    // $code = $request->get('code');
-    // $url = env('TWITCH_REDIRECT_URI')."/token?code=".$code;
 
-    // return Redirect::to($url);
+    $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
+
+    $client = new Client();
+    $res = $client->post($url);
+
+    $datos = json_decode($res->getBody()->getContents());
+
+
+    $token = $datos->access_token;
+
+    return $token;
+
 
     $headers = [
         'Authorization' => 'Bearer ' . $token,

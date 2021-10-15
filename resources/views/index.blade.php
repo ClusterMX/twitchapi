@@ -52,7 +52,7 @@
             var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
 
 
-            window.location = "https://id.twitch.tv/oauth2/authorize?client_id="+client_id+"&redirect_uri="+redirect+"/success&response_type=code&scope=channel:read:subscriptions";
+            window.location = "https://id.twitch.tv/oauth2/authorize?client_id="+client_id+"&redirect_uri="+redirect+"/success&response_type=code&scope=channel:read:subscriptions+user:read:email";
         });
 
     </script>
