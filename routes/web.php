@@ -42,15 +42,15 @@ Route::get('/success', function (Request $request) {
 
     $token = $datos->access_token;
 
-    $headers = [
-        'Authorization' => 'Bearer ' . $token,
-    ];
+    // $headers = [
+    //     'Authorization' => 'Bearer ' . $token,
+    // ];
 
 
-    $data = $client->get($url, $headers);
-    $datosSubs = json_decode($data->getBody()->getContents());
+    // $data = $client->get($url, $headers);
+    // $datosSubs = json_decode($data->getBody()->getContents());
 
-    return $datosSubs;
+    return $token;
 
     // return $code_twitch;
 
