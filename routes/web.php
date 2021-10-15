@@ -61,36 +61,20 @@ Route::get('/success', function (Request $request) {
 
     $datos = json_decode($res->getBody()->getContents());
 
+    $datos_subs  = $datos->data;
 
 
 
-    return $datos->data;
+
+    return redirect()->route('board', ['datos_subs' => $datos_subs]);
 
 });
 
 
 //Se obtiene el codigo generado
-Route::get('/datos', function (Request $request) {
+Route::get('/board', function (Request $request) {
 
-    $token = $request->get('token');
+    return $request->all();
 
-
-
-
-    $client = new Client();
-
-
-
-
-
-
-
-
-    return $datos;
-
-
-
-
-
-})->name('datos');
+})->name('board');
 
