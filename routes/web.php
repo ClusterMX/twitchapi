@@ -26,6 +26,9 @@ Route::get('/', function () {
 //Se utiliza para crear el token y poder acceder
 Route::get('/success', function (Request $request) {
 
+    //Genero el token
+
+
 
     //Se obtiene el codigo de autorización
     $code_twitch = $request->get('code');
@@ -34,7 +37,17 @@ Route::get('/success', function (Request $request) {
     $res = $client->post($url);
     $datos = json_decode($res->getBody()->getContents());
 
-    $token = $datos->access_token;
+    $token = $datos->access_token; //Bearer
+
+    // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
+    $user = "https://id.twitch.tv/oauth2/validate";
+    $u = $client->get($user, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+        ],
+    ]);
+
+    return $u;
 
 
     //Se obtienen los datos de los subs
@@ -62,17 +75,7 @@ Route::get('/datos', function (Request $request) {
 
     $token = $request->get('token');
 
-
-
-
     $client = new Client();
-
-
-
-
-
-
-
 
     return $datos;
 
