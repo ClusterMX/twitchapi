@@ -46,7 +46,9 @@ Route::get('/success', function (Request $request) {
 
     $datosUsuario = json_decode($u->getBody()->getContents());
 
-    return $datosUsuario;
+    $user_id = $datosUsuario->user->id;
+
+    return $user_id;
 
 
     //Se obtienen los datos de los subs
