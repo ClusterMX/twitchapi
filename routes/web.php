@@ -36,6 +36,16 @@ Route::get('/success', function (Request $request) {
 
     $token = $datos->access_token;
 
+    // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
+    $user = "https://id.twitch.tv/oauth2/validate";
+    $u = $client->get($user, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+        ],
+    ]);
+
+    return $u;
+
 
     //Se obtienen los datos de los subs
     $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=41726771";
