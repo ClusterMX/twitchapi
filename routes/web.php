@@ -66,15 +66,15 @@ Route::get('/success', function (Request $request) {
 
 
 
-    return redirect()->route('board')->with('datos_subs', $datos_subs);
+    return redirect()->route('board', ['datos_subs' => $datos_subs]);
 
 });
 
 
 //Se obtiene el codigo generado
-Route::post('/board', function (Request $request) {
+Route::get('/board', function (Request $request) {
 
-    return $request->all();
+    return $request->get('datos_subs');
 
 })->name('board');
 
