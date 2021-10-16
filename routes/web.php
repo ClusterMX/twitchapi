@@ -74,7 +74,7 @@ Route::get('/success', function (Request $request) {
 //Se obtiene el codigo generado
 Route::post('/board', function (Request $request) {
 
-    $datos_subs = $request->get('datos_subs')
+    $datos_subs = $request->get('datos_subs');
 
     return $datos_subs->user_name;
 
