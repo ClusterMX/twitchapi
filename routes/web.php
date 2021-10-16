@@ -76,7 +76,7 @@ Route::get('/board', function (Request $request) {
 
     $datos_subs = $request->get('datos_subs');
 
-    return $datos_subs;
+    return $datos_subs[0]->user_name;
 
 })->name('board');
 
