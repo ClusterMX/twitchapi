@@ -66,7 +66,7 @@ Route::get('/success', function (Request $request) {
 
 
 
-    return redirect()->route('board')->with( ['datos_subs' => $datos_subs] );
+    return redirect()->route('board')->with('datos_subs', $datos_subs);
 
 });
 
