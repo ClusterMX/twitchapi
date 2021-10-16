@@ -72,7 +72,7 @@ Route::get('/success', function (Request $request) {
 
 
 //Se obtiene el codigo generado
-Route::get('/board', function (Request $request) {
+Route::post('/board', function (Request $request) {
 
     return $request->all();
 
