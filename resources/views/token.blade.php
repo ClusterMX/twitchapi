@@ -31,7 +31,7 @@
         <input type="hidden" name="client_secret" value="h5gux7o0jhxrx81n64gnt0cjue67cs">
         <input type="hidden" name="code" value="{{ $code_twitch }}">
         <input type="hidden" name="grant_type" value="authorization_code">
-        <input type="hidden" name="redirect_uri" value="https://twitchapi.clustermx.com/token">
+        {{-- <input type="hidden" name="redirect_uri" value="https://twitchapi.clustermx.com/token"> --}}
         <button class="ui twitch button">
             <i class="twitch icon"></i> Ver datos de subs
         </button>
