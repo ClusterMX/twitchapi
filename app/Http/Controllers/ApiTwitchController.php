@@ -10,7 +10,6 @@ class ApiTwitchController extends Controller
 
     public function tokenGenerator(Request $request)
     {
-        return 'hola';
         //Se obtiene el codigo de autorización
         $code_twitch = $request->get('code');
         $url = "https://id.twitch.tv/oauth2/token?client_id=".env('TWITCH_CLIENT_ID')."&client_secret=".env('TWITCH_CLIENT_SECRET')."&code=".$code_twitch."&grant_type=authorization_code&redirect_uri=".env('TWITCH_REDIRECT_URI')."/token";
@@ -18,11 +17,8 @@ class ApiTwitchController extends Controller
         $res = $client->post($url);
         $datos = json_decode($res->getBody()->getContents());
         $token = $datos->access_token;
-    }
 
 
-    public function userInfo(Request $request)
-    {
         // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
         $client = new Client();
         $user = "https://id.twitch.tv/oauth2/validate";
@@ -35,6 +31,29 @@ class ApiTwitchController extends Controller
         $datosUsuario = json_decode($u->getBody()->getContents());
 
         $user_id = $datosUsuario->user_id;
+
+
+        return redirect()->route('opciones', ['user_id' => $user_id, 'token' => $token]);
+
+
+
+    }
+
+
+    public function userInfo(Request $request)
+    {
+        // // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
+        // $client = new Client();
+        // $user = "https://id.twitch.tv/oauth2/validate";
+        // $u = $client->get($user, [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer ' . $token,
+        //     ],
+        // ]);
+
+        // $datosUsuario = json_decode($u->getBody()->getContents());
+
+        // $user_id = $datosUsuario->user_id;
 
     }
 

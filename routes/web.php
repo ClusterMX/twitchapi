@@ -25,6 +25,11 @@ Route::get('/', function () {
 
 Route::get('/success', [ApiTwitchController::class, 'tokenGenerator'])->name('success');
 
+
+Route::get('/opciones', function (Request $request) {
+    return $request->all();
+})->name('opciones');
+
 //Se utiliza para crear el token y poder acceder
 // Route::get('/success', function (Request $request) {
 
