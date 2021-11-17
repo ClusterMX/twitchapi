@@ -51,8 +51,8 @@
     @foreach ($datos_subs as $ds)
 
         {{ $i = $loop->index +1 }}
-        <div class="star{{ $i }} " style="position: absolute; text-align: center;  display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;">
-            <i style="font-size: 15px; color:gold;" class="fas fa-star"></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
+        <div class="star{{ $i }}" style="position: absolute; text-align: center;  display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;">
+            <i style="font-size: 15px; color:gold;" class="fas fa-star star-icon-{{ $i }}"></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
         </div>
 
 
@@ -85,6 +85,12 @@
 
                 // $(".star"+index).css({'left':posx+'px', 'top':posy+'px', 'animation': 'glow '+timeGlow+'s linear alternate infinite'}).appendTo( 'body' ).fadeIn(100);
                 $(".star"+index).css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
+
+                $(".star-icon-"+{{ $i }}).mouseenter(function() {
+                    $(this).addClass("fa-spin");
+                }).mouseleave(function() {
+                    $(this).removeClass("fa-spin");
+                });
             }
 
 
