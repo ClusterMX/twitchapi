@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <link rel="stylesheet" href="https://oss.maxcdn.com/semantic-ui/2.2.10/semantic.min.css">
+
+    <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
+
+    <style>
+        .login__wrapper-B .login__inner .button {
+    text-transform: none;
+    }
+
+    body{
+        background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    }
+
+    .night .button--twitch {
+        background-color: #9146ff;
+        color: #fff;
+    }
+
+    .star-glow{
+        animation: glow 1.5s linear alternate infinite;
+    }
+
+    @keyframes glow {
+        0% {
+            text-shadow: 1px 1px 5px gold;
+        }
+        100% {
+            text-shadow: 1px 1px 15px gold;
+        }
+    }
+
+    </style>
 </head>
 <body>
 
@@ -24,6 +57,9 @@
 
 
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/15a0d76b97.js" crossorigin="anonymous"></script>
     <script>
         function makeDiv(){
 

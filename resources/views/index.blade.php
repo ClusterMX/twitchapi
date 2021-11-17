@@ -15,36 +15,6 @@
 <body>
 
 
-    <style>
-        .login__wrapper-B .login__inner .button {
-    text-transform: none;
-    }
-
-    body{
-        background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    }
-
-    .night .button--twitch {
-        background-color: #9146ff;
-        color: #fff;
-    }
-
-    .star-glow{
-        animation: glow 1.5s linear alternate infinite;
-    }
-
-    @keyframes glow {
-        0% {
-            text-shadow: 1px 1px 5px gold;
-        }
-        100% {
-            text-shadow: 1px 1px 15px gold;
-        }
-    }
-
-    </style>
-
-
 
 {{--
     <a href="" class="ui twitch button"> <i class="twitch icon"></i> Connect with twitch</a>--}}
