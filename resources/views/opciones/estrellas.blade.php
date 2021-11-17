@@ -86,7 +86,7 @@
                 // $(".star"+index).css({'left':posx+'px', 'top':posy+'px', 'animation': 'glow '+timeGlow+'s linear alternate infinite'}).appendTo( 'body' ).fadeIn(100);
                 $(".star"+index).css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
 
-                $(".star-icon-"+{{ $i }}).mouseenter(function() {
+                $(".star-icon-"+index).mouseenter(function() {
                     $(this).addClass("fa-spin");
                 }).mouseleave(function() {
                     $(this).removeClass("fa-spin");
