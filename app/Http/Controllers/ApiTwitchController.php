@@ -68,6 +68,7 @@ class ApiTwitchController extends Controller
         //Se obtienen los datos de los subs
         $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=".$user_id;
 
+        $client = new Client();
         $res = $client->get($subs, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
