@@ -80,7 +80,7 @@ class ApiTwitchController extends Controller
 
         $datos_subs  = $datos->data;
 
-        return $datos_subs->count();
+        return view('opciones.estrellas', compact('datos_subs'));
 
     }
 }
