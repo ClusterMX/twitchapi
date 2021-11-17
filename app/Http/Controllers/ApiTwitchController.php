@@ -80,7 +80,7 @@ class ApiTwitchController extends Controller
 
         $datos_subs  = $datos->data;
 
-        return $datos_subs->count();
+        return $datos_subs[0]->count();
 
     }
 }
