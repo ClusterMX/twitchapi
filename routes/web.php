@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/success', [ApiTwitchController::class, 'tokenGenerator'])->name('success');
+Route::post('/success', [ApiTwitchController::class, 'tokenGenerator'])->name('success');
 
 
 Route::get('/opciones', function (Request $request) {
