@@ -46,9 +46,7 @@
     @foreach ($datos_subs as $ds)
 
         {{ $i = $loop->index +1 }}
-
-        {{ $aniTime = mt_rand(1, 3); }}
-        <div class="star{{ $i }} " style="position: absolute; display:none; animation: glow {{ $aniTime }}s linear alternate infinite;"><i style="font-size: 15px; color:gold;" class="fas fa-star"></i></div>
+        <div class="star{{ $i }} " style="position: absolute; display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;"><i style="font-size: 15px; color:gold;" class="fas fa-star"></i></div>
 
 
     @endforeach
