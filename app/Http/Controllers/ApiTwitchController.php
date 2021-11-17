@@ -62,7 +62,9 @@ class ApiTwitchController extends Controller
 
     public function subsInfo(Request $request)
     {
-        return $request->all();
+
+        $user_id = $request->get('user_id');
+        $token = $request->get('token');
         //Se obtienen los datos de los subs
         $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=".$user_id;
 
