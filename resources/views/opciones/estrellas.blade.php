@@ -10,6 +10,11 @@
 
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+
     <style>
         .login__wrapper-B .login__inner .button {
     text-transform: none;
@@ -46,8 +51,8 @@
     @foreach ($datos_subs as $ds)
 
         {{ $i = $loop->index +1 }}
-        <div class="star{{ $i }} " style="position: absolute; display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;">
-            <i style="font-size: 15px; color:gold;" class="fas fa-star"></i><br><span style="color:white;">{{ $ds->user_name }}</span>
+        <div class="star{{ $i }} " style="position: absolute; text-align: center;  display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;">
+            <i style="font-size: 15px; color:gold;" class="fas fa-star"></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
         </div>
 
 
