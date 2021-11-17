@@ -37,7 +37,21 @@
         animation: glow 1.5s linear alternate infinite;
     }
 
+    .star-super-glow{
+
+        animation: superglow 1.5s linear alternate infinite !important;
+    }
+
     @keyframes glow {
+        0% {
+            text-shadow: 1px 1px 5px white;
+        }
+        100% {
+            text-shadow: 1px 1px 15px white;
+        }
+    }
+
+    @keyframes superglow {
         0% {
             text-shadow: 1px 1px 5px gold;
         }
@@ -92,8 +106,10 @@
 
                 $(".star-icon-"+index).mouseenter(function() {
                     $(this).addClass("fa-spin");
+                    $(this).addClass("star-super-glow");
                 }).mouseleave(function() {
                     $(this).removeClass("fa-spin");
+                    $(this).addClass("star-super-glow");
                 });
             }
 
