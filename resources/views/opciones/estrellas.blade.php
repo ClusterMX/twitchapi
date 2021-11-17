@@ -55,8 +55,8 @@
     @foreach ($datos_subs as $ds)
 
         {{ $i = $loop->index +1 }}
-        <div class="star{{ $i }}">
-            <i style="font-size: 15px; color:gold;" class="fas fa-star star-icon-{{ $i }} star-glow"></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
+        <div class="star{{ $i }} star-glow">
+            <i style="font-size: 15px; color:gold;" class="fas fa-star star-icon-{{ $i }} "></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
         </div>
 
 
