@@ -15,6 +15,8 @@
 
 
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/15a0d76b97.js" crossorigin="anonymous"></script>
     <script>
         $('#btn1').click(function(e) {
             e.preventDefault();
@@ -25,7 +27,7 @@
             var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
 
 
-            window.location = "{{ route('estrellas'), $user_id }}";
+            window.location = "{{ route('estrellas'), [$user_id, $token] }}";
         });
     </script>
 </body>
