@@ -25,7 +25,7 @@
             var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
 
 
-            window.location = "{{ route('estrellas'), $user_id, $token }}";
+            window.location = "{{ route('estrellas'), $user_id }}";
         });
     </script>
 </body>
