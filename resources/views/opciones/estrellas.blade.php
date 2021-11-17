@@ -109,11 +109,9 @@
                 $(".star"+index).css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
 
                 $(".star-icon-"+index).mouseenter(function() {
-                    $(this).addClass("fa-spin");
-                    $(this).addClass("star-super-glow");
+                    $(this).addClass("fa-spin star-super-glow");
                 }).mouseleave(function() {
-                    $(this).removeClass("fa-spin");
-                    $(this).removeClass("star-super-glow");
+                    $(this).removeClass("fa-spin star-super-glow");
                 });
             }
 
