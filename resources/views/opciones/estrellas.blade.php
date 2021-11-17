@@ -29,11 +29,15 @@
         color: #fff;
     }
 
-    .star-glow{
+    .star-position{
 
         position: absolute;
         text-align: center;
         display:none;
+
+    }
+
+    .star-glow{
         animation: glow 1.5s linear alternate infinite;
     }
 
@@ -69,7 +73,7 @@
     @foreach ($datos_subs as $ds)
 
         {{ $i = $loop->index +1 }}
-        <div class="star{{ $i }} star-glow">
+        <div class="star{{ $i }} star-position">
             <i style="font-size: 15px; color:gold;" class="fas fa-star star-icon-{{ $i }} "></i><br><span style="color:white; font-family: 'Comfortaa', cursive;">{{ $ds->user_name }}</span>
         </div>
 
