@@ -8,10 +8,17 @@
 </head>
 <body>
 
-    <button id="btn1" class="button login-button button--twitch" data-platform="twitch">
-        <i class="fab fa-twitch"></i>
-        <span>Estrellas</span>
-    </button>
+
+    <form action="{{ route('estrellas'), $user_id, $token }}" method="post">
+
+        @csrf
+
+        <button id="btn1" class="button login-button button--twitch" data-platform="twitch">
+            <i class="fab fa-twitch"></i>
+            <span>Estrellas</span>
+        </button>
+
+    </form>
 
 
 
