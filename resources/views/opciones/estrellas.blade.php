@@ -10,12 +10,13 @@
 
 
 
-    @for ($i = 0; $i < 38; $i++)
+    @foreach ($datos_subs as $ds)
 
         {{ $aniTime = mt_rand(1, 3); }}
         <div class="star{{ $i }} " style="position: absolute; display:none; animation: glow {{ $aniTime }}s linear alternate infinite;"><i style="font-size: 15px; color:gold;" class="fas fa-star"></i></div>
 
-    @endfor
+
+    @endforeach
 
 
 
@@ -25,7 +26,7 @@
         function makeDiv(){
 
 
-            for (let index = 0; index < 38; index++) {
+            for (let index = 0; index < 10000; index++) {
 
                 var divsize = ((Math.random()*100) + 50).toFixed();
                 var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
@@ -45,22 +46,7 @@
             }
 
 
-            // var divsize = 50;
 
-            // $newdiv = $('<div/>').css({
-            //     'width':divsize+'px',
-            //     'height':divsize+'px',
-            //     'background-color': color
-            // });
-
-
-
-
-
-
-            // $(".star1").css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
-            // $(".star2").css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
-            // $(".star3").css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
             };
 
             makeDiv();
