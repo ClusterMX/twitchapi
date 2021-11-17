@@ -113,7 +113,7 @@
                     $(this).addClass("star-super-glow");
                 }).mouseleave(function() {
                     $(this).removeClass("fa-spin");
-                    $(this).addClass("star-super-glow");
+                    $(this).removeClass("star-super-glow");
                 });
             }
 
