@@ -25,17 +25,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/15a0d76b97.js" crossorigin="anonymous"></script>
     <script>
-        $('#btn1').click(function(e) {
-            e.preventDefault();
+        // $('#btn1').click(function(e) {
+        //     e.preventDefault();
 
-            // ga('send', 'event', 'firstLogin', 'click', 'twitch', '1');
+        //     // ga('send', 'event', 'firstLogin', 'click', 'twitch', '1');
 
-            var client_id = "{{ env('TWITCH_CLIENT_ID') }}";
-            var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
+        //     var client_id = "{{ env('TWITCH_CLIENT_ID') }}";
+        //     var redirect = "{{ env('TWITCH_REDIRECT_URI') }}";
 
 
-            window.location = "{{ route('estrellas'), $user_id, $token }}";
-        });
+        //     window.location = "{{ route('estrellas'), $user_id, $token }}";
+        // });
     </script>
 </body>
 </html>
