@@ -48,6 +48,8 @@
         {{ $i = $loop->index +1 }}
         <div class="star{{ $i }} " style="position: absolute; display:none; animation: glow {{ mt_rand(1, 3) }}s linear alternate infinite;"><i style="font-size: 15px; color:gold;" class="fas fa-star"></i></div>
 
+        <script>console.log({{ $ds }})</script>
+
 
     @endforeach
 
@@ -77,13 +79,11 @@
 
                 // $(".star"+index).css({'left':posx+'px', 'top':posy+'px', 'animation': 'glow '+timeGlow+'s linear alternate infinite'}).appendTo( 'body' ).fadeIn(100);
                 $(".star"+index).css({'left':posx+'px', 'top':posy+'px'}).appendTo( 'body' ).fadeIn(100);
-
-
             }
 
 
 
-            };
+        };
 
             makeDiv();
     </script>
