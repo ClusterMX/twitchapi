@@ -34,7 +34,9 @@ class ApiTwitchController extends Controller
         $user_id = $datosUsuario->user_id;
 
 
-        return redirect()->route('opciones', ['user_id' => $user_id, 'token' => $token]);
+        // return redirect()->route('opciones', ['user_id' => $user_id, 'token' => $token]);
+
+        return view('opciones', compact('user_id', 'token'));
 
 
 
@@ -73,6 +75,8 @@ class ApiTwitchController extends Controller
         $datos = json_decode($res->getBody()->getContents());
 
         $datos_subs  = $datos->data;
+
+        return $datos_subs;
 
     }
 }

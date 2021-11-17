@@ -30,6 +30,8 @@ Route::get('/opciones', function (Request $request) {
     return $request->all();
 })->name('opciones');
 
+Route::post('/estrellas', [ApiTwitchController::class, 'subsInfo'])->name('estrellas');
+
 //Se utiliza para crear el token y poder acceder
 // Route::get('/success', function (Request $request) {
 
