@@ -13,6 +13,10 @@
 
         @csrf
 
+
+        <input type="hidden" name="user_id" value="{{ $user_id }}">
+        <input type="hidden" name="token" value="{{ $token }}">
+
         <button id="btn1" class="button login-button button--twitch" data-platform="twitch">
             <i class="fab fa-twitch"></i>
             <span>Estrellas</span>
