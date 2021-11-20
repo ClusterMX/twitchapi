@@ -90,7 +90,7 @@ class ApiTwitchController extends Controller
         */
 
         $contador = 0;
-        foreach ($datos_sub as $d) {
+        foreach ($datos_subs as $d) {
             $contador+1;
         }
 
