@@ -89,6 +89,8 @@ class ApiTwitchController extends Controller
         gifter_name
         */
 
+        return $datos_subs;
+
         return view('opciones.estrellas', compact('datos_subs'));
 
     }
