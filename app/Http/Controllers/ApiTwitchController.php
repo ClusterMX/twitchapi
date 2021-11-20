@@ -90,8 +90,38 @@ class ApiTwitchController extends Controller
         */
 
         $contador = 0;
+
+        /**
+         * Datos a guardar:
+         * broadcaster_id
+         * broadcaster_name
+         * tier
+         * user_name
+        */
         foreach ($datos_subs as $d) {
-            $contador = $contador+1;
+
+            //primero verificamos que el usuario existe o no
+
+            //Verificar cuales estan suscritos o no
+
+                //Si estan suscritos
+
+                    //si existe
+
+                        //Verificamos que haya cambios
+
+                            //Si hay cambios, se actualiza
+
+                            //Si no hay cambios, se queda igual
+
+
+
+                    //si no existe
+
+                        //Guardamos la info
+
+                //Si no está suscrito se borra de la base de datos
+
         }
 
         return $datos_subs;
