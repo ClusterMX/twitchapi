@@ -78,10 +78,7 @@ Route::get('/auth/twitch/callback', function () {
 
 
 
-Route::post(
-    'twitch/eventsub/webhook',
-    [EventSubController::class, 'handleWebhook']
-);
+
 
 
 
