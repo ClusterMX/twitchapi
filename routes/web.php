@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\ApiTwitchController;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -20,6 +21,25 @@ use App\Http\Controllers\ApiTwitchController;
 Route::get('/', function () {
     return view('index');
 });
+
+
+////////////////  LOGIN
+
+
+Route::get('/auth/twitch/redirect', function () {
+    return Socialite::driver('twitch')->redirect();
+});
+
+Route::get('/auth/twitch/callback', function () {
+    $user = Socialite::driver('twitch')->user();
+
+    // $user->token
+});
+
+
+
+
+///////////////
 
 
 

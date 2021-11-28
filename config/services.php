@@ -29,5 +29,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'twitch' => [
+        'client_id' => env('TWITCH_HELIX_KEY'),
+        'client_secret' => env('TWITCH_HELIX_SECRET'),
+        'redirect' => env('TWITCH_HELIX_REDIRECT_URI')
+      ],
 
 ];
