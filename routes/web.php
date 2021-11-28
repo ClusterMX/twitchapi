@@ -73,7 +73,7 @@ Route::get('/auth/twitch/callback', function () {
         ]
     ]);
 
-    return $result;
+    dd($result);
 });
 
 
