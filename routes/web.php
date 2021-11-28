@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\ApiTwitchController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\EventSubController;
+use romanzipp\Twitch\Enums\EventSubType;
+
 
 
 /*
@@ -41,20 +44,44 @@ Route::get('/auth/twitch/callback', function () {
     $twitch = new romanzipp\Twitch\Twitch;
 
     // Get User by Username
-    $result = $twitch->getUsers(['login' => $user->nickname]);
+    // $result = $twitch->getUsers(['login' => $user->nickname]);
 
     // Check, if the query was successful
-    if ( ! $result->success()) {
-        return null;
-    }
+    // if ( ! $result->success()) {
+    //     return null;
+    // }
 
     // Shift result to get single user data
-    $data = $result->shift();
+    // $data = $result->shift();
 
-    return $data->id;
+    // return $data;
 
     // $user->token
+
+
+    //crear evento
+
+    $result = $twitch->subscribeEventSub([], [
+        'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
+        'version' => '1',
+        'condition' => [
+            'broadcaster_user_id' => $user->id,
+        ],
+        'transport' => [
+            'method' => 'webhook',
+            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+        ]
+    ]);
+
+    return $result;
 });
+
+
+
+Route::post(
+    'twitch/eventsub/webhook',
+    [EventSubController::class, 'handleWebhook']
+);
 
 
 
