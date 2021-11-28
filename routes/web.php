@@ -27,7 +27,11 @@ Route::get('/', function () {
 
 
 Route::get('/auth/twitch/redirect', function () {
-    return Socialite::driver('twitch')->redirect();
+    return Socialite::driver('twitch')
+    ->with(['client_id' => env('TWITCH_CLIENT_ID')])
+    ->scopes(['channel:read:subscriptions', 'user:read:email'])
+    ->redirect();
+
 });
 
 Route::get('/auth/twitch/callback', function () {
