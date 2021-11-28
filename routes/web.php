@@ -40,11 +40,18 @@ Route::get('/auth/twitch/callback', function () {
 
     $twitch = new Twitch;
 
-    $result = $twitch->getUsers();
+    // Get User by Username
+    $result = $twitch->getUsers(['login' => $user->nickname]);
 
+    // Check, if the query was successful
+    if ( ! $result->success()) {
+        return null;
+    }
 
+    // Shift result to get single user data
+    $data = $result->shift();
 
-    return $result;
+    return $data->id;
 
     // $user->token
 });
