@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Log;
 
-class EventSubController extends Controller
+class EventSubController extends BaseController
 {
     public function handleChannelFollowNotification(array $payload): Response
     {
@@ -26,9 +26,9 @@ class EventSubController extends Controller
         return $this->successMethod(); // handle the subscription revocation...
     }
 
-    public function handleWebhook(Request $request){
+    // public function handleWebhook(Request $request){
 
-        Log::info($request);
+    //     Log::info($request);
 
-    }
+    // }
 }
