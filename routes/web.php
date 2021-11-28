@@ -37,7 +37,7 @@ Route::get('/auth/twitch/redirect', function () {
 
 Route::get('/auth/twitch/callback', function () {
     $user = Socialite::driver('twitch')->user();
-   dd($user);
+    return $user;
 
     // $user->token
 });
