@@ -9,7 +9,6 @@ use App\Http\Controllers\EventSubController;
 use romanzipp\Twitch\Enums\EventSubType;
 
 use romanzipp\Twitch\Twitch;
-use App\Http\Controllers\ApiTwitchController;
 
 
 
