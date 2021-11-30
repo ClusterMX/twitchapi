@@ -66,20 +66,20 @@ Route::get('/auth/twitch/callback', function () {
 
     $twitch = new Twitch;
 
-    $result = $twitch->subscribeEventSub([], [
-        'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
-        'version' => '1',
-        'condition' => [
-            'broadcaster_user_id' => $user->id,
-        ],
-        'transport' => [
-            'method' => 'webhook',
-            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-            'secret' => 'chenchosecret',
-        ]
-    ]);
+    // $result = $twitch->subscribeEventSub([], [
+    //     'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
+    //     'version' => '1',
+    //     'condition' => [
+    //         'broadcaster_user_id' => $user->id,
+    //     ],
+    //     'transport' => [
+    //         'method' => 'webhook',
+    //         'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+    //         'secret' => 'chenchosecret',
+    //     ]
+    // ]);
 
-    $result2 = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+    $result2 = $twitch->getEventSubs(['status' => 'webhook_callback_verification_pending']);
 
     foreach ($result2->data() as $item) {
         // process the subscription
