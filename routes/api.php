@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post(
-    '/twitch/eventsub/webhook',
+    'twitch/eventsub/webhook',
     [EventSubController::class, 'handleWebhook']
 );
 
