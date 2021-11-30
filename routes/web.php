@@ -66,27 +66,34 @@ Route::get('/auth/twitch/callback', function () {
 
     $twitch = new Twitch;
 
-    $result = $twitch->subscribeEventSub([], [
-        'type' => 'channel.channel_points_custom_reward_redemption.add', //EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_REMOVE,
-        'version' => '1',
-        'condition' => [
-            'broadcaster_user_id' => $user->id,
-        ],
-        'transport' => [
-            'method' => 'webhook',
-            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-            // 'secret' => 'chenchosecret',
-        ]
-    ]);
+    // $result = $twitch->subscribeEventSub([], [
+    //     'type' => 'channel.channel_points_custom_reward_redemption.add', //EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_REMOVE,
+    //     'version' => '1',
+    //     'condition' => [
+    //         'broadcaster_user_id' => $user->id,
+    //     ],
+    //     'transport' => [
+    //         'method' => 'webhook',
+    //         'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+    //         // 'secret' => 'chenchosecret',
+    //     ]
+    // ]);
 
-    return $result->data();
 
-    // $result = $twitch->getEventSubs(['status' => 'enabled']);
+
+    $result = $twitch->getEventSubs(['status' => 'enabled']);
 
     // foreach ($result->data() as $item) {
     //     // process the subscription
     //     echo $item.'<br>';
     // }
+
+    // $twitch->unsubscribeEventSub([
+    //     'id' => '932b34ad-821a-490f-af43-b327187d0f5c'
+    // ]);
+
+
+    return $result->data();
 
     // dd($result);
 });
