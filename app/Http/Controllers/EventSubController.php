@@ -8,6 +8,7 @@ use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 
 use Log;
+use Carbon\Carbon;
 
 class EventSubController extends BaseController
 {

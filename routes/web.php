@@ -10,7 +10,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 use romanzipp\Twitch\Twitch;
 
-use Carbon\Carbon;
+
 
 /*
 |--------------------------------------------------------------------------
