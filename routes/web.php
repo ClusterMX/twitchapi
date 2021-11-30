@@ -87,6 +87,7 @@ Route::get('/auth/twitch/callback', function () {
 // );
 
 Route::get('/lista', function () {
+    $user = Socialite::driver('twitch')->user();
     $twitch = new Twitch;
 
     $result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
@@ -97,6 +98,9 @@ Route::get('/lista', function () {
     }
 });
 
+
+//twitch event verify-subscription subscribe -F http://apitwitch.test/api/twitch/eventsub/webhook -s chenchosecret
+//twitch event trigger subscribe -F http://apitwitch.test/api/twitch/eventsub/webhook -s chenchosecret
 
 
 

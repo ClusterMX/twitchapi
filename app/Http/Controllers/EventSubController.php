@@ -11,24 +11,11 @@ use Log;
 
 class EventSubController extends BaseController
 {
-    public function handleChannelFollowNotification(array $payload): Response
-    {
-        return $this->successMethod(); // handle the channel follow notification...
+
+
+    public function handleWebhookRedeem(Request $request){
+
+        Log::info($request);
+
     }
-
-    protected function handleNotification(array $payload): Response
-    {
-        return $this->successMethod(); // handle all other incoming notifications...
-    }
-
-    protected function handleRevocation(array $payload): Response
-    {
-        return $this->successMethod(); // handle the subscription revocation...
-    }
-
-    // public function handleWebhook(Request $request){
-
-    //     Log::info($request);
-
-    // }
 }
