@@ -38,7 +38,7 @@ Route::get('/auth/twitch/redirect', function () {
 
 
 
-});
+})->name('loginTwitch');
 
 Route::get('/auth/twitch/callback', function () {
     $user = Socialite::driver('twitch')->user();
@@ -75,6 +75,7 @@ Route::get('/auth/twitch/callback', function () {
         'transport' => [
             'method' => 'webhook',
             'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+            'secret' => 'chenchosecret',
         ]
     ]);
 

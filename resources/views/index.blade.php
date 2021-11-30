@@ -19,10 +19,10 @@
 {{--
     <a href="" class="ui twitch button"> <i class="twitch icon"></i> Connect with twitch</a>--}}
 
-    <button id="connect-with-twitch" class="button login-button button--twitch" data-platform="twitch">
+    <a href="{{ route('loginTwitch') }}" class="button login-button button--twitch" data-platform="twitch">
         <i class="fab fa-twitch"></i>
         <span>Continue with Twitch</span>
-    </button>
+    </a>
 
 
 
