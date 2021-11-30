@@ -81,16 +81,16 @@ Route::get('/auth/twitch/callback', function () {
 
 
 
-    $result = $twitch->getEventSubs(['status' => 'enabled']);
+    // $result = $twitch->getEventSubs(['status' => 'enabled']);
 
     // foreach ($result->data() as $item) {
     //     // process the subscription
     //     echo $item.'<br>';
     // }
 
-    // $twitch->unsubscribeEventSub([
-    //     'id' => '932b34ad-821a-490f-af43-b327187d0f5c'
-    // ]);
+    $result = $twitch->unsubscribeEventSub([
+        'id' => '11c32de9-4c24-4dce-8e6e-e3fdaa876ef4'
+    ]);
 
 
     return $result->data();
