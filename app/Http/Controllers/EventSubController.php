@@ -15,13 +15,5 @@ class EventSubController extends BaseController
         return $this->successMethod(); // handle the channel follow notification...
     }
 
-    protected function handleNotification(array $payload): Response
-    {
-        return $this->successMethod(); // handle all other incoming notifications...
-    }
 
-    protected function handleRevocation(array $payload): Response
-    {
-        return $this->successMethod(); // handle the subscription revocation...
-    }
 }
