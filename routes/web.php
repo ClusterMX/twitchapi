@@ -79,7 +79,14 @@ Route::get('/auth/twitch/callback', function () {
         ]
     ]);
 
-    dd($result);
+    $result2 = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+
+    foreach ($result2->data() as $item) {
+        // process the subscription
+        echo $item.'<br>';
+    }
+
+    dd($result2);
 });
 
 
