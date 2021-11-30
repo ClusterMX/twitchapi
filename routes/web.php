@@ -9,6 +9,7 @@ use App\Http\Controllers\EventSubController;
 use romanzipp\Twitch\Enums\EventSubType;
 
 use romanzipp\Twitch\Twitch;
+use App\Http\Controllers\ApiTwitchController;
 
 
 
@@ -40,63 +41,65 @@ Route::get('/auth/twitch/redirect', function () {
 
 })->name('loginTwitch');
 
-Route::get('/auth/twitch/callback', function () {
-    $user = Socialite::driver('twitch')->user();
+Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'test']);
 
-    // $user->id;
+// Route::get('/auth/twitch/callback', function () {
+//     // $user = Socialite::driver('twitch')->user();
 
-
-    // Get User by Username
-    // $result = $twitch->getUsers(['login' => $user->nickname]);
-
-    // Check, if the query was successful
-    // if ( ! $result->success()) {
-    //     return null;
-    // }
-
-    // Shift result to get single user data
-    // $data = $result->shift();
-
-    // return $data;
-
-    // $user->token
+//     // $user->id;
 
 
-    //crear evento
+//     // Get User by Username
+//     // $result = $twitch->getUsers(['login' => $user->nickname]);
 
-    $twitch = new Twitch;
+//     // Check, if the query was successful
+//     // if ( ! $result->success()) {
+//     //     return null;
+//     // }
 
-    $result = $twitch->subscribeEventSub([], [
-        'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
-        'version' => '1',
-        'condition' => [
-            'broadcaster_user_id' => $user->id,
-        ],
-        'transport' => [
-            'method' => 'webhook',
-            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-            // 'secret' => 'chenchosecret',
-        ]
-    ]);
+//     // Shift result to get single user data
+//     // $data = $result->shift();
+
+//     // return $data;
+
+//     // $user->token
 
 
+//     //crear evento
 
-    // $result = $twitch->getEventSubs(['status' => 'enabled']);
+//     // $twitch = new Twitch;
 
-    // foreach ($result->data() as $item) {
-    //     // process the subscription
-    //     echo $item.'<br>';
-    // }
+//     // $result = $twitch->subscribeEventSub([], [
+//     //     'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
+//     //     'version' => '1',
+//     //     'condition' => [
+//     //         'broadcaster_user_id' => $user->id,
+//     //     ],
+//     //     'transport' => [
+//     //         'method' => 'webhook',
+//     //         'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+//     //         // 'secret' => 'chenchosecret',
+//     //     ]
+//     // ]);
 
-    // $result = $twitch->unsubscribeEventSub([
-    //     'id' => 'e8282f98-41a7-46e7-b9d2-a6d721e973dd'
-    // ]);
 
 
-    return $result->data();
+//     // $result = $twitch->getEventSubs(['status' => 'enabled']);
 
-    // dd($result);
-});
+//     // foreach ($result->data() as $item) {
+//     //     // process the subscription
+//     //     echo $item.'<br>';
+//     // }
+
+//     // $result = $twitch->unsubscribeEventSub([
+//     //     'id' => 'e8282f98-41a7-46e7-b9d2-a6d721e973dd'
+//     // ]);
+
+
+//     // return $result->data();
+
+//     // dd($result);
+// });
 
 
 

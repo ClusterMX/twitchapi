@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use romanzipp\Twitch\Twitch;
 
 class ApiTwitchController extends Controller
 {
@@ -129,4 +130,40 @@ class ApiTwitchController extends Controller
         return view('opciones.estrellas', compact('datos_subs'));
 
     }
+
+
+     public function test(Request $request)
+    {
+
+        $user = Socialite::driver('twitch')->user();
+
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'user:read:email',
+            'user:edit:follows',
+            'channel:read:subscriptions'
+        ]);
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_FOLLOW,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => '12826', // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' => config('app.url') . '/twitch/eventsub/webhook',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
+        dd($payload, $result);
+    }
+
+
+
 }
