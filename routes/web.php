@@ -43,6 +43,8 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', function () {
     $user = Socialite::driver('twitch')->user();
 
+    $user->id;
+
 
     // Get User by Username
     // $result = $twitch->getUsers(['login' => $user->nickname]);
