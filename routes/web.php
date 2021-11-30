@@ -8,6 +8,9 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\EventSubController;
 use romanzipp\Twitch\Enums\EventSubType;
 
+use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Twitch;
+
 
 
 /*
@@ -41,7 +44,6 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', function () {
     $user = Socialite::driver('twitch')->user();
 
-    $twitch = new romanzipp\Twitch\Twitch;
 
     // Get User by Username
     // $result = $twitch->getUsers(['login' => $user->nickname]);
@@ -76,10 +78,23 @@ Route::get('/auth/twitch/callback', function () {
     // dd($result);
 });
 
-Route::get(
-    '/notificación',
-    [EventSubController::class, 'handleNotification']
-);
+
+
+// Route::get(
+//     '/notificación',
+//     [EventSubController::class, 'handleNotification']
+// );
+
+Route::get('/lista', function () {
+    $twitch = new Twitch;
+
+    $result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+
+    foreach ($result->data() as $item) {
+        // process the subscription
+        echo $item.'<br>';
+    }
+});
 
 
 
