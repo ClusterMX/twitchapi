@@ -67,7 +67,7 @@ Route::get('/auth/twitch/callback', function () {
     $twitch = new Twitch;
 
     $result = $twitch->subscribeEventSub([], [
-        'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_REMOVE,
+        'type' => 'channel.channel_points_custom_reward_redemption.add', //EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_REMOVE,
         'version' => '1',
         'condition' => [
             'broadcaster_user_id' => $user->id,
