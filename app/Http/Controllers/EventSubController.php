@@ -44,6 +44,8 @@ class EventSubController extends BaseController
 
         }
 
+        Log::info($this->missingMethod());
+
         return $this->missingMethod();
 
     }
