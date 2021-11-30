@@ -138,29 +138,24 @@ class ApiTwitchController extends Controller
 
         $user = Socialite::driver('twitch')->user();
 
-        $twitch = new Twitch;
-
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
-            'user:read:email',
-            'user:edit:follows',
-            'channel:read:subscriptions'
-        ]);
-
         $token = $result->data()->access_token;
 
         $payload = [
-            'type' => EventSubType::CHANNEL_FOLLOW,
+            'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
             'version' => '1',
             'condition' => [
-                'broadcaster_user_id' => '12826', // twitch
+                'broadcaster_user_id' => $user->id,
             ],
             'transport' => [
                 'method' => 'webhook',
-                'callback' => config('app.url') . '/twitch/eventsub/webhook',
+                'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+                // 'secret' => 'chenchosecret',
             ]
         ];
 
-        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+        $result = $twitch->withToken($token)->getEventSubs(['status' => 'enabled']);
+
+        // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
         dd($payload, $result);
     }

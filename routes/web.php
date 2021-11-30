@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\ApiTwitchController;
+
 use Laravel\Socialite\Facades\Socialite;
+
 use App\Http\Controllers\EventSubController;
 use romanzipp\Twitch\Enums\EventSubType;
 
