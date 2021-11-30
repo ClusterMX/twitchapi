@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use romanzipp\Twitch\Twitch;
+use Laravel\Socialite\Facades\Socialite;
 
 class ApiTwitchController extends Controller
 {
