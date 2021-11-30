@@ -79,7 +79,7 @@ Route::get('/auth/twitch/callback', function () {
     //     ]
     // ]);
 
-    $result2 = $twitch->getEventSubs(['status' => 'webhook_callback_verification_pending']);
+    $result2 = $twitch->getEventSubs(['status' => 'enabled']);
 
     foreach ($result2->data() as $item) {
         // process the subscription
