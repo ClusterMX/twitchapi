@@ -61,20 +61,25 @@ Route::get('/auth/twitch/callback', function () {
 
     //crear evento
 
-    $result = $twitch->subscribeEventSub([], [
-        'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
-        'version' => '1',
-        'condition' => [
-            'broadcaster_user_id' => $user->id,
-        ],
-        'transport' => [
-            'method' => 'webhook',
-            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-        ]
-    ]);
+    // $result = $twitch->subscribeEventSub([], [
+    //     'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
+    //     'version' => '1',
+    //     'condition' => [
+    //         'broadcaster_user_id' => $user->id,
+    //     ],
+    //     'transport' => [
+    //         'method' => 'webhook',
+    //         'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+    //     ]
+    // ]);
 
-    dd($result);
+    // dd($result);
 });
+
+Route::get(
+    '/notificación',
+    [EventSubController::class, 'handleNotification']
+);
 
 
 

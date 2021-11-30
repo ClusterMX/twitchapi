@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventSubController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post(
-    'twitch/eventsub/webhook',
+    '/twitch/eventsub/webhook',
     [EventSubController::class, 'handleWebhook']
 );
