@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use romanzipp\Twitch\Twitch;
 use Laravel\Socialite\Facades\Socialite;
+
+use romanzipp\Twitch\Twitch;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ApiTwitchController extends Controller
 {
