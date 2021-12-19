@@ -138,6 +138,7 @@ class ApiTwitchController extends Controller
      public function test(Request $request)
     {
 
+        $twitch = new Twitch;
         $user = Socialite::driver('twitch')->user();
 
         // dd($user);
