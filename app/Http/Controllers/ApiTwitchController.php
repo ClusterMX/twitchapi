@@ -150,7 +150,7 @@ class ApiTwitchController extends Controller
         // dd($access_token);
 
         $payload = [
-            'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
+            'type' => EventSubType::CHANNEL_FOLLOW,
             'version' => '1',
             'condition' => [
                 'broadcaster_user_id' => $user->id,
@@ -163,7 +163,7 @@ class ApiTwitchController extends Controller
         ];
 
 
-        // $result = $twitch->subscribeEventSub([],$payload);
+        $result = $twitch->subscribeEventSub([],$payload);
         $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
 
         // $result = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
