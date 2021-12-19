@@ -138,7 +138,7 @@ class ApiTwitchController extends Controller
 
         $user = Socialite::driver('twitch')->user();
 
-        $token = $result->data()->access_token;
+        dd($user);
 
         $payload = [
             'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
