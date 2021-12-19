@@ -163,7 +163,7 @@ class ApiTwitchController extends Controller
         ];
 
 
-        $result = $twitch->subscribeEventSub([],$payload);
+        // $result = $twitch->subscribeEventSub([],$payload);
         $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_pending']);
 
         // $result = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
