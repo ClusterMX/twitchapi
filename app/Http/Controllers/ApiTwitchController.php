@@ -145,7 +145,9 @@ class ApiTwitchController extends Controller
 
         $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email']);
 
-        dd($resultado->data);
+        $access_token = $resultado->data()->access_token;
+
+        dd($access_token);
 
         $payload = [
             'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
