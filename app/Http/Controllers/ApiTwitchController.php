@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Laravel\Socialite\Facades\Socialite;
 
+
+use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
 use romanzipp\Twitch\Enums\EventSubType;
 
