@@ -141,7 +141,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
         $user = Socialite::driver('twitch')->user();
 
-        // dd($user);
+        dd($user);
 
         $payload = [
             'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
@@ -152,7 +152,7 @@ class ApiTwitchController extends Controller
             'transport' => [
                 'method' => 'webhook',
                 'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-                // 'secret' => 'chenchosecret',
+                'secret' => 'chenchosecret',
             ]
         ];
 
