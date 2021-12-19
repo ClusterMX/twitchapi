@@ -156,7 +156,7 @@ class ApiTwitchController extends Controller
             ]
         ];
 
-        $result = $twitch->withToken($token)->getEventSubs(['status' => 'enabled']);
+        $result = $twitch->withToken($user->token)->getEventSubs(['status' => 'enabled']);
 
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
