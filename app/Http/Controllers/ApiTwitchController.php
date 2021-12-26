@@ -137,7 +137,7 @@ class ApiTwitchController extends Controller
     }
 
 
-     public function test(Request $request)
+     public function testsss(Request $request)
     {
 
         $twitch = new Twitch;
@@ -163,23 +163,53 @@ class ApiTwitchController extends Controller
         ];
 
 
-        // $result = $twitch->subscribeEventSub([],$payload);
+        $result = $twitch->subscribeEventSub([],$payload);
         // $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
 
-        // $resultad = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
-        $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_failed']);
-        $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending']);
-        $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
-        $exceeded  = $twitch->withToken($access_token)->getEventSubs(['status' => 'notification_failures_exceeded']);
-        $urevoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'user_removed']);
-        $revoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'authorization_revoked']);
+        // $result = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
+
+        // $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_failed']);
+        // $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending']);
+        // $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
+        // $exceeded  = $twitch->withToken($access_token)->getEventSubs(['status' => 'notification_failures_exceeded']);
+        // $urevoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'user_removed']);
+        // $revoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'authorization_revoked']);
 
 
 
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
-        // dd($payload, $resultad);
-        dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
+        dd($payload, $result);
+        // dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
+    }
+
+    public function test(Request $request)
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'user:read:email',
+            'user:edit:follows',
+            'channel:read:subscriptions'
+        ]);
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_FOLLOW,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => '41726771', // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
+        dd($payload, $result);
     }
 
 
