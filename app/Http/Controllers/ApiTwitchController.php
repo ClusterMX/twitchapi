@@ -145,7 +145,7 @@ class ApiTwitchController extends Controller
 
         $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email']);
 
-        $access_token = $resultado->data()->access_token;
+        $access_token = $result->data()->access_token;;
 
         // dd($access_token);
 
@@ -158,7 +158,7 @@ class ApiTwitchController extends Controller
             'transport' => [
                 'method' => 'webhook',
                 'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-                'secret' => 'chenchosecret',
+                //'secret' => 'chenchosecret',
             ]
         ];
 
@@ -166,20 +166,20 @@ class ApiTwitchController extends Controller
         // $result = $twitch->subscribeEventSub([],$payload);
         // $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
 
-        // $resultad = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
-        $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_failed']);
-        $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending']);
-        $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
-        $exceeded  = $twitch->withToken($access_token)->getEventSubs(['status' => 'notification_failures_exceeded']);
-        $urevoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'user_removed']);
-        $revoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'authorization_revoked']);
+        $resultad = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
+        // $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_failed']);
+        // $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending']);
+        // $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
+        // $exceeded  = $twitch->withToken($access_token)->getEventSubs(['status' => 'notification_failures_exceeded']);
+        // $urevoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'user_removed']);
+        // $revoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'authorization_revoked']);
 
 
 
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
-        // dd($payload, $resultad);
-        dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
+        dd($payload, $resultad);
+        // dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
     }
 
 
