@@ -167,11 +167,14 @@ class ApiTwitchController extends Controller
         // $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
 
         // $resultad = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
-        $resultad = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending ']);
+        $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending ']);
+        $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending ']);
+        $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled  ']);
 
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
-        dd($payload, $resultad);
+        // dd($payload, $resultad);
+        dd($pending, $failed, $enabled);
     }
 
 
