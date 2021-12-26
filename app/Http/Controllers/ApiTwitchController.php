@@ -183,7 +183,7 @@ class ApiTwitchController extends Controller
         dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
     }
 
-    public function test(Request $request)
+    public function testss(Request $request)
     {
         $twitch = new Twitch;
 
