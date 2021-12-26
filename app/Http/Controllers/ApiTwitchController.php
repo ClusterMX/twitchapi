@@ -167,14 +167,19 @@ class ApiTwitchController extends Controller
         // $resultad = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
 
         // $resultad = $twitch->withToken($access_token)->subscribeEventSub([],$payload);
-        $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending ']);
-        $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending ']);
-        $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled  ']);
+        $pending = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_failed']);
+        $failed = $twitch->withToken($access_token)->getEventSubs(['status' => 'webhook_callback_verification_pending']);
+        $enabled  = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
+        $exceeded  = $twitch->withToken($access_token)->getEventSubs(['status' => 'notification_failures_exceeded']);
+        $urevoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'user_removed']);
+        $revoked  = $twitch->withToken($access_token)->getEventSubs(['status' => 'authorization_revoked']);
+
+
 
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
         // dd($payload, $resultad);
-        dd($pending, $failed, $enabled);
+        dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
     }
 
 
