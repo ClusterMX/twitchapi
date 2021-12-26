@@ -27,5 +27,18 @@ class EventSubController extends BaseController
         return $this->successMethod(); // handle the subscription revocation...
     }
 
+    /**
+     * Handle a EventSub callback verification call.
+     *
+     * @param array $payload
+     *
+     * @return Response
+     */
+    protected function handleWebhookCallbackVerification(array $payload): Response
+    {
+        app('debugbar')->disable();
+        return new Response($payload['challenge'], 200);
+    }
+
 
 }
