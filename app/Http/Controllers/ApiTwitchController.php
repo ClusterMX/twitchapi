@@ -11,6 +11,8 @@ use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
 use romanzipp\Twitch\Enums\EventSubType;
 
+use Log;
+
 class ApiTwitchController extends Controller
 {
 
@@ -256,6 +258,12 @@ class ApiTwitchController extends Controller
         $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
         dd($payload, $result);
+    }
+
+
+    public function pruebaLog(Request $request)
+    {
+        Log::info('Log info');
     }
 
 

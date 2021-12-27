@@ -50,6 +50,8 @@ Route::get('/twitch/check', [ApiTwitchController::class, 'check']);
 
 Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('delete.event');
 
+Route::get('/pruebalog', [ApiTwitchController::class, 'pruebaLog']);
+
 
 
 // Route::get('/auth/twitch/callback', function () {
