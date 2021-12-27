@@ -41,7 +41,7 @@ Route::get('/auth/twitch/redirect', function () {
 
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'test']);
 
-Route::post('/twitch/eventsub/webhook', 'EventSubController@handleWebhook');
+Route::post('/twitch/eventsub/webhook', [EventSubController::class, 'handleWebhook']);
 
 
 Route::get('/twitch/test', [ApiTwitchController::class, 'test']);
