@@ -12,7 +12,7 @@ use romanzipp\Twitch\Twitch;
 use romanzipp\Twitch\Enums\EventSubType;
 
 //modelos
-use app\models\User;
+use App\Models\User;
 
 use Log;
 
