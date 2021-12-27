@@ -26,7 +26,7 @@ use romanzipp\Twitch\Twitch;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('auth.login');
 });
 
 
@@ -42,9 +42,13 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
+
+
     Route::get('/dashboard', function () {
         return 'dashboard';
     })->name('dashboard');
+
+
 });
 
 
