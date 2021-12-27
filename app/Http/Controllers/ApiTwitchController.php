@@ -285,8 +285,8 @@ class ApiTwitchController extends Controller
 
             //si existe, actualizá el token y el refresh token
             $user->update([
-                'twitch_token' => $twitchUser->twitch_token,
-                'twitch_refresh' => $twitchUser->twitch_refresh,
+                'twitch_token' => $twitchUser->token,
+                'twitch_refresh' => $twitchUser->refreshToken,
             ]);
 
             return $user;
