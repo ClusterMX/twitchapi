@@ -51,6 +51,6 @@ return [
         /*
          * Maximum difference (in seconds) allowed between the header's timestamp and the current time.
          */
-        'tolerance' => 600,
+        'tolerance' => 900,
     ],
 ];

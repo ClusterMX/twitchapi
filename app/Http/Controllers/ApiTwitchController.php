@@ -237,6 +237,8 @@ class ApiTwitchController extends Controller
             'channel:read:subscriptions'
         ]);
 
+        return $result->data();
+
         $token = $result->data()->access_token;
 
         $payload = [
