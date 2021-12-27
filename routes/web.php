@@ -41,7 +41,14 @@ Route::get('/auth/twitch/redirect', function () {
 
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
-Route::post('/twitch/eventsub/webhook', [EventSubController::class, 'handleWebhook']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function ($id) {
+        return 'dashboard';
+    })->name('dashboard');
+});
+
+
+//////PRUEBAS
 
 
 Route::get('/twitch/test', [ApiTwitchController::class, 'test']);
