@@ -29,6 +29,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/master', function () {
+    return view('master');
+});
+
 
 ////////////////  LOGIN
 
