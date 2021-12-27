@@ -141,7 +141,7 @@ class ApiTwitchController extends Controller
     {
 
         $twitch = new Twitch;
-        $user = Socialite::driver('twitch')->user();
+        //$user = Socialite::driver('twitch')->user();
 
         $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email']);
 
@@ -153,7 +153,7 @@ class ApiTwitchController extends Controller
             'type' => EventSubType::CHANNEL_FOLLOW,
             'version' => '1',
             'condition' => [
-                'broadcaster_user_id' => $user->id,
+                'broadcaster_user_id' => '41726771',
             ],
             'transport' => [
                 'method' => 'webhook',
