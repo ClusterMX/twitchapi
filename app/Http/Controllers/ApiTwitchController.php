@@ -293,7 +293,7 @@ class ApiTwitchController extends Controller
             $user = User::create([
                 'name' => $twitchUser->name,
                 'email' => $twitchUser->email,
-                'twitch_id' => $twitchUser->twitch_id,
+                'twitch_id' => $twitchUser->id,
                 'twitch_token' => $twitchUser->twitch_token,
                 'twitch_refresh' => $twitchUser->twitch_refresh,
                 'avatar' => $twitchUser->avatar,
