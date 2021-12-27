@@ -137,7 +137,7 @@ class ApiTwitchController extends Controller
     }
 
 
-     public function testss(Request $request)
+     public function check(Request $request)
     {
 
         $twitch = new Twitch;
