@@ -24,6 +24,12 @@
         <span>Continue with Twitch</span>
     </a>
 
+    <form action="{{ route('delete.event') }}">
+        @csrf
+        <input type="text" name="idevent">
+        <button>Enviar</button>
+    </form>
+
 
 
 

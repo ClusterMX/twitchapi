@@ -183,6 +183,20 @@ class ApiTwitchController extends Controller
         dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
     }
 
+    public function delete(Request $request)
+    {
+        $evento  = $request->get('idevent');
+        //Elimina el evento
+        $twitch = new Twitch;
+
+        $twitch->unsubscribeEventSub([
+            'id' => $evento
+        ]);
+
+        //Regresamos al formulario
+        return redirect()->back();
+    }
+
     public function testsss(Request $request)
     {
         $twitch = new Twitch;
