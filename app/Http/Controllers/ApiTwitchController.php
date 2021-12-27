@@ -267,6 +267,14 @@ class ApiTwitchController extends Controller
     }
 
 
+    public function login()
+    {
+        $user = Socialite::driver('twitch')->user();
+
+        return $user;
+    }
+
+
 
 
 

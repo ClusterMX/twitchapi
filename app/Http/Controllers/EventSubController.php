@@ -33,17 +33,11 @@ class EventSubController extends Controller
     {
         $payload = json_decode($request->getContent(), true);
 
-        Log::info('Payload de handleWebhook');
-        Log::info($payload);
-
         $messageType = $request->header('twitch-eventsub-message-type');
         $messageId = $request->header('twitch-eventsub-message-id');
         $retries = (int) $request->header('twitch-eventsub-message-retry');
         $timestamp = Carbon::createFromTimestampUTC(
                         EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp')));
-
-        Log::info('messageType de handleWebhook');
-        Log::info($messageType);
 
         if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);
@@ -51,8 +45,8 @@ class EventSubController extends Controller
 
         $method = 'handle' . Str::studly(str_replace('.', '_', $messageType));
 
-        Log::info('method de handleWebhook');
-        Log::info($method);
+        // Log::info('method de handleWebhook');
+        // Log::info($method);
 
         EventSubReceived::dispatch($payload, $messageId, $retries, $timestamp);
 
@@ -61,8 +55,8 @@ class EventSubController extends Controller
 
             EventSubHandled::dispatch($payload, $messageId, $retries, $timestamp);
 
-            Log::info('response de handleWebhook');
-            Log::info($response);
+            // Log::info('response de handleWebhook');
+            // Log::info($response);
 
             return $response;
         }
@@ -135,5 +129,12 @@ class EventSubController extends Controller
         Log::info('handleChannelFollowNotification');
         Log::info($payload);
         return $this->successMethod(); // handle the channel follow notification...
+    }
+
+    public function handleChannelChannelPointsCustomRewardRedemptionAddNotification(array $payload): Response
+    {
+        Log::info('handleChannelFollowNotification');
+        Log::info($payload);
+        # code del broadcast
     }
 }

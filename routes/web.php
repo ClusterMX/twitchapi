@@ -39,7 +39,7 @@ Route::get('/auth/twitch/redirect', function () {
     ->redirect();
 })->name('loginTwitch');
 
-Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'test']);
+Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::post('/twitch/eventsub/webhook', [EventSubController::class, 'handleWebhook']);
 
