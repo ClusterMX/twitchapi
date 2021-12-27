@@ -271,7 +271,7 @@ class ApiTwitchController extends Controller
     {
         $user = Socialite::driver('twitch')->user();
 
-        $user->id;
+        return $user;
     }
 
 
