@@ -282,8 +282,8 @@ class ApiTwitchController extends Controller
 
             //si existe, actualizá el token y el refresh token
             $user->update([
-                'twitch_token' => $twitchUser->twitch_token
-                'twitch_refresh' => $twitchUser->twitch_refresh
+                'twitch_token' => $twitchUser->twitch_token,
+                'twitch_refresh' => $twitchUser->twitch_refresh,
             ]);
 
             return $user;
@@ -291,12 +291,12 @@ class ApiTwitchController extends Controller
 
             //si no existe, guardamos el usuario en la base de datos
             $user = User::create([
-                'name' => $twitchUser->name
-                'email' => $twitchUser->email
-                'twitch_id' => $twitchUser->twitch_id
-                'twitch_token' => $twitchUser->twitch_token
-                'twitch_refresh' => $twitchUser->twitch_refresh
-                'avatar' => $twitchUser->avatar
+                'name' => $twitchUser->name,
+                'email' => $twitchUser->email,
+                'twitch_id' => $twitchUser->twitch_id,
+                'twitch_token' => $twitchUser->twitch_token,
+                'twitch_refresh' => $twitchUser->twitch_refresh,
+                'avatar' => $twitchUser->avatar,
             ]);
 
             return $user;
