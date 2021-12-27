@@ -11,6 +11,7 @@ use romanzipp\Twitch\Events\EventSubHandled;
 use romanzipp\Twitch\Events\EventSubReceived;
 use romanzipp\Twitch\Http\Middleware\VerifyEventSubSignature;
 use romanzipp\Twitch\Objects\EventSubSignature;
+use Log;
 
 class EventSubController extends Controller
 {
@@ -32,11 +33,17 @@ class EventSubController extends Controller
     {
         $payload = json_decode($request->getContent(), true);
 
+        Log::info('Payload de handleWebhook');
+        Log::info($payload);
+
         $messageType = $request->header('twitch-eventsub-message-type');
         $messageId = $request->header('twitch-eventsub-message-id');
         $retries = (int) $request->header('twitch-eventsub-message-retry');
         $timestamp = Carbon::createFromTimestampUTC(
                         EventSubSignature::getTimestamp($request->header('twitch-eventsub-message-timestamp')));
+
+        Log::info('messageType de handleWebhook');
+        Log::info($messageType);
 
         if ('notification' === $messageType) {
             $messageType = sprintf('%s.notification', $payload['subscription']['type']);
@@ -44,12 +51,18 @@ class EventSubController extends Controller
 
         $method = 'handle' . Str::studly(str_replace('.', '_', $messageType));
 
+        Log::info('method de handleWebhook');
+        Log::info($method);
+
         EventSubReceived::dispatch($payload, $messageId, $retries, $timestamp);
 
         if (method_exists($this, $method)) {
             $response = $this->{$method}($payload);
 
             EventSubHandled::dispatch($payload, $messageId, $retries, $timestamp);
+
+            Log::info('response de handleWebhook');
+            Log::info($response);
 
             return $response;
         }
