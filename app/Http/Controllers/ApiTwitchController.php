@@ -248,7 +248,6 @@ class ApiTwitchController extends Controller
             'transport' => [
                 'method' => 'webhook',
                 'callback' => config('app.url') . '/twitch/eventsub/webhook',
-                'secret' => 'chenchosecret'
             ]
         ];
 
