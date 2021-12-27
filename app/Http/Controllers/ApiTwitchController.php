@@ -281,17 +281,30 @@ class ApiTwitchController extends Controller
         if ($user) {
 
             //si existe, actualizá el token y el refresh token
-            return 'existe';
+            $user->update([
+                'twitch_token' => $twitchUser->twitch_token
+                'twitch_refresh' => $twitchUser->twitch_refresh
+            ]);
+
+            return $user;
         }else{
 
             //si no existe, guardamos el usuario en la base de datos
-            return 'no existe';
+            $user = User::create([
+                'name' => $twitchUser->name
+                'email' => $twitchUser->email
+                'twitch_id' => $twitchUser->twitch_id
+                'twitch_token' => $twitchUser->twitch_token
+                'twitch_refresh' => $twitchUser->twitch_refresh
+                'avatar' => $twitchUser->avatar
+            ]);
+
+            return $user;
         }
 
+        Auth::login($user);
 
-
-
-        return $user->id;
+        return redirect('/dashboard');
     }
 
 
