@@ -42,9 +42,13 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'test']);
 
 Route::post('/twitch/eventsub/webhook', 'EventSubController@handleWebhook');
+
+
 Route::get('/twitch/test', [ApiTwitchController::class, 'test']);
 
 Route::get('/twitch/check', [ApiTwitchController::class, 'check']);
+
+Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('delete.event');
 
 
 
