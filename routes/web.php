@@ -42,7 +42,7 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function ($id) {
+    Route::get('/dashboard', function () {
         return 'dashboard';
     })->name('dashboard');
 });
