@@ -116,4 +116,9 @@ class EventSubController extends Controller
     {
         return new Response();
     }
+
+    public function handleChannelFollowNotification(array $payload): Response
+    {
+        return $this->successMethod(); // handle the channel follow notification...
+    }
 }
