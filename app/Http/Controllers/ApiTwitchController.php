@@ -289,7 +289,6 @@ class ApiTwitchController extends Controller
                 'twitch_refresh' => $twitchUser->refreshToken,
             ]);
 
-            return $user;
         }else{
 
             $password = Str::random(10);
@@ -304,7 +303,6 @@ class ApiTwitchController extends Controller
                 'password' => $password,
             ]);
 
-            return $user;
         }
 
         Auth::login($user);
