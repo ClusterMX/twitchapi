@@ -12,32 +12,28 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EventSubController extends BaseController
 {
-    public function handleChannelFollowNotification(array $payload): Response
-    {
-        return $this->successMethod(); // handle the channel follow notification...
-    }
-
-    protected function handleNotification(array $payload): Response
-    {
-        return $this->successMethod(); // handle all other incoming notifications...
-    }
-
-    protected function handleRevocation(array $payload): Response
-    {
-        return $this->successMethod(); // handle the subscription revocation...
-    }
-
     /**
-     * Handle a EventSub callback verification call.
+     * Handle a EventSub notification call.
      *
      * @param array $payload
      *
      * @return Response
      */
-    protected function handleWebhookCallbackVerification(array $payload): Response
+    protected function handleNotification(array $payload): Response
     {
-        app('debugbar')->disable();
-        return new Response($payload['challenge'], 200);
+        return $this->successMethod();
+    }
+
+    /**
+     * Handle a EventSub revocation call.
+     *
+     * @param array $payload
+     *
+     * @return Response
+     */
+    protected function handleRevocation(array $payload): Response
+    {
+        return $this->successMethod();
     }
 
 
