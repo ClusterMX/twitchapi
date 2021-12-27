@@ -269,9 +269,16 @@ class ApiTwitchController extends Controller
 
     public function login()
     {
-        $user = Socialite::driver('twitch')->user();
+        $twitchUser = Socialite::driver('twitch')->user();
 
-        return $user;
+        dd($twitchUser)
+
+        //buscamos si el usuario existe
+        // $user = User::where('twitch_id', $twitchUser->id)->first();
+
+        //si existe, actualizá el token y el refresh token
+
+        return $user->id;
     }
 
 
