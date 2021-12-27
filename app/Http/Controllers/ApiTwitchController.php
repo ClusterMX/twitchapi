@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 use GuzzleHttp\Client;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -290,6 +292,7 @@ class ApiTwitchController extends Controller
             return $user;
         }else{
 
+            $password = Str::random(10);
             //si no existe, guardamos el usuario en la base de datos
             $user = User::create([
                 'name' => $twitchUser->name,
@@ -298,6 +301,7 @@ class ApiTwitchController extends Controller
                 'twitch_token' => $twitchUser->token,
                 'twitch_refresh' => $twitchUser->refreshToken,
                 'avatar' => $twitchUser->avatar,
+                'password' => $password,
             ]);
 
             return $user;
