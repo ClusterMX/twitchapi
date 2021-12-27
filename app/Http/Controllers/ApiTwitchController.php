@@ -274,6 +274,7 @@ class ApiTwitchController extends Controller
     {
         $twitchUser = Socialite::driver('twitch')->user();
 
+        dd($twitchUser);
 
         //buscamos si el usuario existe
         $user = User::where('twitch_id', $twitchUser->id)->first();
@@ -294,7 +295,7 @@ class ApiTwitchController extends Controller
                 'name' => $twitchUser->name,
                 'email' => $twitchUser->email,
                 'twitch_id' => $twitchUser->id,
-                'twitch_token' => $twitchUser->twitch_token,
+                'twitch_token' => $twitchUser->token,
                 'twitch_refresh' => $twitchUser->twitch_refresh,
                 'avatar' => $twitchUser->avatar,
             ]);
