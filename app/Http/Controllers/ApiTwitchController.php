@@ -11,6 +11,9 @@ use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
 use romanzipp\Twitch\Enums\EventSubType;
 
+//modelos
+use app\models\User;
+
 use Log;
 
 class ApiTwitchController extends Controller
@@ -274,9 +277,20 @@ class ApiTwitchController extends Controller
         dd($twitchUser);
 
         //buscamos si el usuario existe
-        // $user = User::where('twitch_id', $twitchUser->id)->first();
+        $user = User::where('twitch_id', $twitchUser->id)->first();
 
-        //si existe, actualizá el token y el refresh token
+        if ($user) {
+
+            //si existe, actualizá el token y el refresh token
+            return 'existe';
+        }else{
+
+            //si no existe, guardamos el usuario en la base de datos
+            return 'no existe';
+        }
+
+
+
 
         return $user->id;
     }

@@ -18,6 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('twitch_id');
+            $table->string('twitch_token');
+            $table->string('twitch_refresh');
+            $table->string('avatar');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
