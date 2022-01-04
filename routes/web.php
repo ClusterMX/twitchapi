@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
         $result = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id]);
-        return json_decode($result);
+        return json_encode($result);
         return view('dashboard.main');
     })->name('dashboard');
 
