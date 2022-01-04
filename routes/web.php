@@ -63,7 +63,8 @@ Route::middleware(['auth'])->group(function () {
 
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        // $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        $subs = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id]);
 
         return dd($subs);
         return view('dashboard.main', compact('followers'));
