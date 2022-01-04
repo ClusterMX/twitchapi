@@ -33,9 +33,6 @@ Route::get('/master', function () {
     return view('master');
 });
 
-Route::get('/dashboard-test', function () {
-    return view('dashboard.main');
-});
 
 
 ////////////////  LOGIN
@@ -53,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/dashboard', function () {
-        return 'dashboard';
+        return view('dashboard.main');
     })->name('dashboard');
 
 
