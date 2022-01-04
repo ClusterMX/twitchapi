@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
         $users = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id]);
         $viewcount = $users->data();
 
-        return $viewcount;
+        return $viewcount[0]["view_count"];
         return view('dashboard.main', compact('followers'));
     })->name('dashboard');
 
