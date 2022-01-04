@@ -57,7 +57,7 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="4500"
+                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{ $followers }}"
                                             data-kt-countup-prefix="">0</div>
                                     </div>
                                     <!--end::Number-->
@@ -83,7 +83,7 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="10260"
+                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{ $viewcount }}"
                                             data-kt-countup-prefix="">0</div>
                                     </div>
                                     <!--end::Number-->
@@ -200,6 +200,7 @@
                 <!--begin::Body-->
                 <div class="card-body pt-3">
                     <!--begin::Item-->
+                    @foreach ($videos as $video)
                     <div class="d-flex align-items-sm-center mb-7">
                         <!--begin::Symbol-->
                         <div class="symbol symbol-60px symbol-2by3 me-4">
@@ -218,6 +219,8 @@
                         </div>
                         <!--end::Title-->
                     </div>
+                    @endforeach
+
                     <!--end::Item-->
                 </div>
                 <!--end::Body-->
