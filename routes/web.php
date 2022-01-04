@@ -40,16 +40,17 @@ Route::get('/master', function () {
 
 
 Route::get('/auth/twitch/redirect', function () {
-    return Socialite::driver('twitch')
-    ->setScopes(['channel:read:subscriptions', 'user:read:email'])
-    ->redirect();
+    // return Socialite::driver('twitch')
+    // ->setScopes(['channel:read:subscriptions', 'user:read:email'])
+    // ->redirect();
+    $result = Socialite::driver('twitch')
+    ->setScopes(['channel:read:subscriptions', 'user:read:email']);
+    dd($result);
 })->name('loginTwitch');
 
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
-
-
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
