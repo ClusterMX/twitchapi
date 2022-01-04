@@ -213,7 +213,7 @@
                         <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                             <div class="flex-grow-1 me-2">
                                 <a href="{{ $video->url }}" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{ $video->title }}</a>
-                                <span class="text-muted fw-bold d-block pt-1">{{ $video->published_at }}</span>
+                                <span class="text-muted fw-bold d-block pt-1">{{ $video->duration }}</span>
                             </div>
                             {{-- <span class="badge badge-light-success fs-8 fw-bolder my-2">Approved</span> --}}
                         </div>
