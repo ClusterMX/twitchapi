@@ -41,7 +41,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->scopes(['channel:read:subscriptions', 'user:read:email'])
+    ->setScopes(['channel:read:subscriptions', 'user:read:email'])
     ->redirect();
 })->name('loginTwitch');
 
