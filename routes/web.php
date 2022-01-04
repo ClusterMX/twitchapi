@@ -64,10 +64,10 @@ Route::middleware(['auth'])->group(function () {
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         // $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
-        $users = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id]);
-        $viewcount = $users->data();
+        $users = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id])->data();
+        $viewcount = $users[0]->view_count;
 
-        return $viewcount[0]->view_count;
+        return $viewcount;
         return view('dashboard.main', compact('followers'));
     })->name('dashboard');
 
