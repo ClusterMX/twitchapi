@@ -41,7 +41,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->setScopes(['channel:read:subscriptions', 'user:read:email', 'user:edit:follows'])
+    ->setScopes(['channel:read:subscriptions', 'user:read:email', 'user:edit:follows', 'channel_subscriptions'])
     ->redirect();
 })->name('loginTwitch');
 
@@ -54,7 +54,8 @@ Route::middleware(['auth'])->group(function () {
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
             'user:read:email',
             'user:edit:follows',
-            'channel:read:subscriptions'
+            'channel:read:subscriptions',
+            'channel_subscriptions'
         ]);
 
 
