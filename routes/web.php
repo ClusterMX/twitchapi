@@ -33,6 +33,10 @@ Route::get('/master', function () {
     return view('master');
 });
 
+Route::get('/dashboard-test', function () {
+    return view('dashboard.main');
+});
+
 
 ////////////////  LOGIN
 
