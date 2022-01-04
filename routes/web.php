@@ -52,8 +52,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        return $followers;
-        return view('dashboard.main');
+        $subs = $twitch->getUsersFollows(['broadcaster_id' => Auth::user()->twitch_id])->getTotal();
+
+        return $subs;
+        return view('dashboard.main', compact('followers'));
     })->name('dashboard');
 
 
