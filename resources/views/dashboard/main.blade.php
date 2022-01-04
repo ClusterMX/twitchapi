@@ -205,15 +205,15 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-60px symbol-2by3 me-4">
                             <div class="symbol-label"
-                                style="background-image: url('https://static-cdn.jtvnw.net/cf_vods/d1m7jfoe9zdc1j/f60c92c122ebfbdcbc46_chenchizkan_45004208381_1641170587//thumb/thumb0-640x360.jpg')">
+                                style="background-image: url('{{ $video->thumbnail_url }}')">
                             </div>
                         </div>
                         <!--end::Symbol-->
                         <!--begin::Title-->
                         <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                             <div class="flex-grow-1 me-2">
-                                <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">¿Bajamos a oro o llegamos a Platinub 2?</a>
-                                <span class="text-muted fw-bold d-block pt-1">2 de enero del 2022</span>
+                                <a href="{{ $video->url }}" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{ $video->title }}</a>
+                                <span class="text-muted fw-bold d-block pt-1">{{ $video->published_at }}</span>
                             </div>
                             {{-- <span class="badge badge-light-success fs-8 fw-bolder my-2">Approved</span> --}}
                         </div>
