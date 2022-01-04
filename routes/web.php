@@ -40,12 +40,9 @@ Route::get('/master', function () {
 
 
 Route::get('/auth/twitch/redirect', function () {
-    // return Socialite::driver('twitch')
-    // ->setScopes(['channel:read:subscriptions', 'user:read:email'])
-    // ->redirect();
-    $result = Socialite::driver('twitch')
-    ->setScopes(['channel:read:subscriptions', 'user:read:email']);
-    dd($result);
+    return Socialite::driver('twitch')
+    ->setScopes(['channel:read:subscriptions', 'user:read:email'])
+    ->redirect();
 })->name('loginTwitch');
 
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
