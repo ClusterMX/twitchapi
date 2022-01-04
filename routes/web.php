@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/dashboard', function () {
+        $twitch = new Twitch;
+        $result = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id]);
+        dd($result);
         return view('dashboard.main');
     })->name('dashboard');
 
