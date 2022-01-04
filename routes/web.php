@@ -41,7 +41,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->setScopes(['channel:read:subscriptions', 'user:read:email'])
+    ->setScopes(['channel:read:subscriptions', 'user:read:email', 'user:edit:follows'])
     ->redirect();
 })->name('loginTwitch');
 
@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
-        return dd($result->data());
+        return dd($subs);
         return view('dashboard.main', compact('followers'));
     })->name('dashboard');
 
