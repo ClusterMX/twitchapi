@@ -50,9 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
-        // $twitch = $twitch->getUsers(['login' => Auth::user()->name]);
+        $twitch = $twitch->getUsers(['login' => Auth::user()->name]);
 
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
+        $result = $twitch->getOAuthToken($, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
 
         if ( ! $result->success()) {
             return;
@@ -61,13 +61,12 @@ Route::middleware(['auth'])->group(function () {
         $accessToken = $result->data()->access_token;
 
 
-        // $token = $result->data()->access_token;
 
-        // $twitch = $twitch->withToken($token);
-        dd($accessToken);
+        $twitch = $twitch->withToken($token);
+        dd($twitch);
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
         $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
