@@ -54,9 +54,9 @@ Route::middleware(['auth'])->group(function () {
         $result = $twitch->getUsers(['login' => Auth::user()->name]);
         $twitchlogin = $result->data();
 
-        // $subs = $twitch->getSubscriptions(['broadcaster_id' => ]);
+        $subs = $twitch->getSubscriptions(['broadcaster_id' => $twitchlogin[0]->id]);
 
-        dd($result, $twitch, $twitchlogin[0]->id);
+        dd($result, $twitch, $subs);
 
 
     });
