@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
-        $result = $twitch->getOAuthToken(Auth::user()->twitch_id, GrantType::CLIENT_CREDENTIALS, [
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
             'channel:read:subscriptions',
             'user:read:email',
             'user:edit:follows'
@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
         $token = $result->data()->access_token;
 
-        $twitch->setToken($token);
+        dd($twitch->setToken($token));
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
@@ -71,7 +71,6 @@ Route::middleware(['auth'])->group(function () {
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
 
-        dd($subs);
         return view('dashboard.main', compact('followers', 'viewcount', 'videos', 'search', 'replace'));
     })->name('dashboard');
 
