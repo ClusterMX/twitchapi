@@ -50,14 +50,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
-        $result = $twitch->getUsers(['login' => Auth::user()->name]);
+        $twitch = $twitch->getUsers(['login' => Auth::user()->name]);
 
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
+
+        if ( ! $result->success()) {
+            return;
+        }
+
+        $accessToken = $result->data()->access_token;
 
 
         // $token = $result->data()->access_token;
 
         // $twitch = $twitch->withToken($token);
-        dd($result);
+        dd($accessToken);
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
