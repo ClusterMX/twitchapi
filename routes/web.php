@@ -48,6 +48,7 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
+        $twitchUser = Socialite::driver('twitch')->user();
         $twitch = new Twitch;
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
@@ -58,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 
         $token = $result->data()->access_token;
 
-        $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        $subs = $twitchUser->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
         dd($subs);
 
