@@ -47,8 +47,24 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/test-dashboard', function () {
+        $twitch = new Twitch;
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read']);
+
+        if ( ! $result->success()) {
+            return;
+        }
+
+        $accessToken = $result->data()->access_token;
+
+        $subs = $twitch->withToken($accessToken)->getSubscriptions(['broadcaster_id' => '41726771']);
+
+
+    });
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
+
+        $twitch =
 
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
