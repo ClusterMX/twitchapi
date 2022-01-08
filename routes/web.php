@@ -41,7 +41,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->scopes(['user:read:email', 'user:edit:follows', 'channel:read:subscriptions'])
+    ->scopes(["user:read:email", "user:edit:follows", "channel:read:subscriptions"])
     ->redirect();
 })->name('loginTwitch');
 
@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
-        $users = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id])->data();
+        $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
 
