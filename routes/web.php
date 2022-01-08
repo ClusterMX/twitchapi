@@ -50,9 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
         $twitch = new Twitch;
         $resultado = $twitch->getUsers(['login' => 'herrausragend']);
-        dd($resultado);
+
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read']);
-        dd($result);
+        dd($result, $resultado);
 
         if ( ! $result->success()) {
             return;
