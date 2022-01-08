@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 
         $twitch = $twitch->getUsers(['login' => Auth::user()->name]);
 
-        $result = $twitch->getOAuthToken($, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
 
         if ( ! $result->success()) {
             return;
