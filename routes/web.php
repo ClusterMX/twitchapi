@@ -57,10 +57,12 @@ Route::middleware(['auth'])->group(function () {
             'user:edit:follows'
         ]);
 
-        dd($result);
 
 
         $token = $result->data()->access_token;
+
+        $subs = Twitch::withClientId(Auth::user()->twitch_id)->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        dd($subs);
 
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
