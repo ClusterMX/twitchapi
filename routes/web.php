@@ -49,23 +49,16 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
         $twitch = new Twitch;
-        $resultado = $twitch->getUsers(['login' => 'chenchizkan']);
 
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'user:read:email',
+            'user:edit:follows',
+            'channel:read:subscriptions'
+        ]);
 
-        if ( ! $result->success()) {
-            return;
-        }
+        $token = $result->data()->access_token;
 
-
-
-        $accessToken = $result->data()->access_token;
-
-        $resultado = $resultado->withToken($accessToken);
-
-        dd($result, $resultado);
-
-        $subs = $twitch->withToken($accessToken)->getSubscriptions(['broadcaster_id' => '41726771']);
+        $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
         dd($subs);
 
