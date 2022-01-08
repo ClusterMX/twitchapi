@@ -31,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::get('/master', function () {
-    return view('master');
+    return view('welcome');
 });
 
 
@@ -68,8 +68,11 @@ Route::middleware(['auth'])->group(function () {
         $viewcount = $users[0]->view_count;
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
 
+        $search  = array('%{width}', '%{height}');
+        $replace = array('320', '180');
+
         // return $videos;
-        return view('dashboard.main', compact('followers', 'viewcount', 'videos'));
+        return view('dashboard.main', compact('followers', 'viewcount', 'videos', 'search', 'replace'));
     })->name('dashboard');
 
 

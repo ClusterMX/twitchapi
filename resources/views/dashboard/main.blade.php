@@ -205,7 +205,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-60px symbol-2by3 me-4">
                             <div class="symbol-label"
-                                style="background-image: url('{{ $video->thumbnail_url }}')">
+                                style="background-image: url('{{ str_replace($search, $replace, $video->thumbnail_url) }}')">
                             </div>
                         </div>
                         <!--end::Symbol-->
