@@ -50,13 +50,30 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
         $twitch = new Twitch;
 
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'user:read:email',
+            'user:edit:follows',
+            'channel:read:subscriptions'
+        ]);
 
-        $result = $twitch->getUsers(['login' => Auth::user()->name]);
-        $twitchlogin = $result->data();
+        $token = $result->data()->access_token;
 
-        $subs = $twitch->getSubscriptions(['broadcaster_id' => $twitchlogin[0]->id]);
+        $payload = [
+            'type' => EventSubType::CHANNEL_FOLLOW,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+            ]
+        ];
 
-        dd($result, $twitch, $subs);
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
+        dd($payload, $result);
+
 
 
     });
