@@ -52,13 +52,18 @@ Route::middleware(['auth'])->group(function () {
         $resultado = $twitch->getUsers(['login' => 'chenchizkan']);
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
-        dd($result, $resultado);
 
         if ( ! $result->success()) {
             return;
         }
 
+
+
         $accessToken = $result->data()->access_token;
+
+        $resultado = $resultado->withToken($accessToken);
+
+        dd($result, $resultado);
 
         $subs = $twitch->withToken($accessToken)->getSubscriptions(['broadcaster_id' => '41726771']);
 
