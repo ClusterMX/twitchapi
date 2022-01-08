@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         $twitch = new Twitch;
         $resultado = $twitch->getUsers(['login' => 'herrausragend']);
 
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read']);
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
         dd($result, $resultado);
 
         if ( ! $result->success()) {
