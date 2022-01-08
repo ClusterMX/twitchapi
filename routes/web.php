@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
 
         $subs = $twitch->withToken($accessToken)->getSubscriptions(['broadcaster_id' => '41726771']);
 
+        dd($subs);
+
 
     });
     Route::get('/dashboard', function () {
