@@ -52,8 +52,12 @@ Route::middleware(['auth'])->group(function () {
         $twitch = new Twitch;
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
-            'channel:read:subscriptions'
+            'channel:read:subscriptions',
+            'user:read:email',
+            'user:edit:follows'
         ]);
+
+        dd($result);
 
 
         $token = $result->data()->access_token;
