@@ -58,21 +58,9 @@ Route::middleware(['auth'])->group(function () {
 
         $token = $result->data()->access_token;
 
-        $payload = [
-            'type' => EventSubType::CHANNEL_FOLLOW,
-            'version' => '1',
-            'condition' => [
-                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
-            ],
-            'transport' => [
-                'method' => 'webhook',
-                'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-            ]
-        ];
+        $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
-        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
-
-        dd($payload, $result);
+        dd($subs);
 
 
 
