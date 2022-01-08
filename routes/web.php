@@ -11,6 +11,8 @@ use App\Http\Controllers\EventSubController;
 use romanzipp\Twitch\Enums\EventSubType;
 
 use romanzipp\Twitch\Twitch;
+use romanzipp\Twitch\Facades\Twitch;
+
 use romanzipp\Twitch\Enums\GrantType;
 
 
