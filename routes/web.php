@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
+        dd($twitch);
+
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
             'channel:read:subscriptions',
