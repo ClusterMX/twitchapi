@@ -50,9 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
         $twitch = new Twitch;
 
-        $twitchlogin = $result->data();
 
         $result = $twitch->getUsers(['login' => Auth::user()->name]);
+        $twitchlogin = $result->data();
+
         // $subs = $twitch->getSubscriptions(['broadcaster_id' => ]);
 
         dd($result, $twitch, $twitchlogin);
