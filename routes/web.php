@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
 
 
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        // $subs = $twitch->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
         $users = $twitch->withToken($token)->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
 
-        // return $videos;
+        dd($subs);
         return view('dashboard.main', compact('followers', 'viewcount', 'videos', 'search', 'replace'));
     })->name('dashboard');
 
