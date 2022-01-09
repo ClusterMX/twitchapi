@@ -27,7 +27,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
         //$user = Socialite::driver('twitch')->user();
 
-        $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email']);
+        $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email', 'channel:manage:redemptions', 'channel:read:redemptions']);
 
         $access_token = $resultado->data()->access_token;;
 
