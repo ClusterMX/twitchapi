@@ -81,11 +81,11 @@ class ApiTwitchController extends Controller
         return redirect()->back();
     }
 
-    public function testsss(Request $request)
+    public function eventoPrueba(Request $request)
     {
         $twitch = new Twitch;
 
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+        $result = $twitch->getOAuthToken(null, GrantType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD, [
             'user:read:email',
             'user:edit:follows',
             'channel:read:subscriptions'
@@ -97,7 +97,7 @@ class ApiTwitchController extends Controller
             'type' => EventSubType::CHANNEL_FOLLOW,
             'version' => '1',
             'condition' => [
-                'broadcaster_user_id' => '41726771', // twitch
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
             ],
             'transport' => [
                 'method' => 'webhook',

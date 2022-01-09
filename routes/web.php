@@ -93,6 +93,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ApiTwitchController::class, 'dashboard'])->name('dashboard');
 
 
+    //Rutas prueba
+    Route::get('/evento', [ApiTwitchController::class, 'eventoPrueba']);
+
+
 });
 
 
