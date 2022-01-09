@@ -73,6 +73,7 @@ class EventSubController extends Controller
      */
     protected function handleWebhookCallbackVerification(array $payload): Response
     {
+        app('debugbar')->disable();
         return new Response($payload['challenge'], 200);
     }
 
