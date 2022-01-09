@@ -129,7 +129,7 @@ class EventSubController extends Controller
         Log::info('handleChannelFollowNotification');
         //convertimos el array en un objeto
         $result = collect([$payload]);
-        Log::info($result->suscription);
+        Log::info($result);
 
         return $this->successMethod(); // handle the channel follow notification...
     }
