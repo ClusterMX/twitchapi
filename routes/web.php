@@ -51,6 +51,8 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
 
+    $subs = $twitch->withToken(Auth::usert()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+    dd($subs);
 
     });
     Route::get('/dashboard', function () {
