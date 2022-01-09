@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
 
@@ -14,6 +13,7 @@
         <giftexample-component></giftexample-component>
     </div>
 
+    <script src="{{ mix('js/app.js') }}"></script>
 
 
 </body>
