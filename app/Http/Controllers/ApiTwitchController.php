@@ -107,7 +107,7 @@ class ApiTwitchController extends Controller
             ]
         ];
 
-        $result = $twitch->subscribeEventSub([], $payload);
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
         dd($payload, $result);
     }
