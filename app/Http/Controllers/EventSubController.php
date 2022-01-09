@@ -55,8 +55,8 @@ class EventSubController extends Controller
 
             EventSubHandled::dispatch($payload, $messageId, $retries, $timestamp);
 
-            Log::info('response de handleWebhook');
-            Log::info($response);
+            // Log::info('response de handleWebhook');
+            // Log::info($response);
 
             return $response;
         }
@@ -138,6 +138,9 @@ class EventSubController extends Controller
     {
         Log::info('handleChannelChannelPointsCustomRewardRedemptionAddNotification');
         Log::info($payload);
+        if ($payload["event"]["reward"]["id"] == 'c8ba3aa0-a688-496b-b87a-34402443c773') {
+            Log::info("Success event");
+        }
         return $this->successMethod();
     }
 }
