@@ -48,20 +48,21 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
-        $twitchUser = Socialite::driver('twitch')->user();
         $twitch = new Twitch;
 
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+        $result = $twitch->getOAuthAuthorizeUrl('code', [
             'user:read:email',
             'user:edit:follows',
             'channel:read:subscriptions'
-        ]);
+        ], null, false);
+
+        dd($result);
 
         $token = $result->data()->access_token;
 
         $subs = $twitchUser->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
-        dd($subs);
+
 
 
 
@@ -69,23 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
-
-
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['user:read:email', 'user:edit:follows', 'channel:read:subscriptions']);
-
-        if ( ! $result->success()) {
-            return;
-        }
-
-        $accessToken = $result->data()->access_token;
-
-
-
-        $twitch = $twitch->withToken($accessToken);
-        dd($result->data());
-
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        // $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
         $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
