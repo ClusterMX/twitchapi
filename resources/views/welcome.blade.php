@@ -10,7 +10,7 @@
 <body>
 
     <div id="app">
-        <example-component></example-component>
+        <giftexample-component></giftexample-component>
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
