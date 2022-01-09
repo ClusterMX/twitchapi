@@ -12,6 +12,8 @@ use romanzipp\Twitch\Twitch;
 use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Enums\EventSubType;
 
+use Illuminate\Support\Facades\Http;
+
 
 
 /*
@@ -55,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
             'user:edit:follows',
             'channel:read:subscriptions'
         ], null, false);
+
+        $response = Http::get($result);
+
+        return $response->body();
 
         return $result;
 
