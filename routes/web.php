@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
 
-        dd($subs);
+        dd($subs[0]->total);
         return view('dashboard.main', compact('followers', 'viewcount', 'videos', 'search', 'replace'));
     })->name('dashboard');
 
