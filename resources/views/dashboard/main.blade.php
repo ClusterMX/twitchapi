@@ -70,7 +70,7 @@
                                 <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                     <!--begin::Number-->
                                     <div class="d-flex align-items-center">
-                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="80">0
+                                        <div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{ $subs }}">0
                                         </div>
                                     </div>
                                     <!--end::Number-->
