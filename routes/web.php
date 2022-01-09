@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
             'channel:read:subscriptions'
         ], null, false);
 
-        dd($result);
+        return $result;
 
         $token = $result->data()->access_token;
 
