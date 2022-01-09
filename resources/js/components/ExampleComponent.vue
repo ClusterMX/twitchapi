@@ -9,7 +9,6 @@
             alt=""
             class="center"
           />
-          <!-- <p v-if="elementVisible">hola</p> -->
         </transition>
       </div>
     </div>
