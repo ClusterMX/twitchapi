@@ -95,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
 
     //Rutas prueba
     Route::get('/evento', [ApiTwitchController::class, 'eventoPrueba']);
+    Route::get('/evento-check', [ApiTwitchController::class, 'check']);
 
 
 });
