@@ -9,6 +9,20 @@ use Log;
 
 class EventSubController extends BaseController
 {
+    /**
+     * Handle a EventSub callback verification call.
+     *
+     * @param array $payload
+     *
+     * @return Response
+     */
+    protected function handleWebhookCallbackVerification(array $payload): Response
+    {
+        app('debugbar')->disable();
+        return new Response($payload['challenge'], 200);
+    }
+
+
     public function handleChannelFollowNotification(array $payload): Response
     {
         Log::info('handleChannelFollowNotification');
