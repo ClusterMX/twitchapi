@@ -33,6 +33,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/example', function () {
+    return view('welcome');
+});
+
 Route::get('/master', function () {
 
     event(new PointsReward());
