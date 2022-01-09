@@ -32,7 +32,38 @@ Route::get('/', function () {
 });
 
 Route::get('/master', function () {
-    return view('welcome');
+    $array = array (
+        'subscription' =>
+        array (
+          'id' => 'f3bf522a-b370-4cec-b907-87408b39f023',
+          'status' => 'enabled',
+          'type' => 'channel.follow',
+          'version' => '1',
+          'condition' =>
+          array (
+            'broadcaster_user_id' => '41726771',
+          ),
+          'transport' =>
+          array (
+            'method' => 'webhook',
+            'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+          ),
+          'created_at' => '2021-12-27T04:34:51.378035566Z',
+          'cost' => 0,
+        ),
+        'event' =>
+        array (
+          'user_id' => '753201185',
+          'user_login' => 'chenchizkanbot',
+          'user_name' => 'chenchizkanbot',
+          'broadcaster_user_id' => '41726771',
+          'broadcaster_user_login' => 'chenchizkan',
+          'broadcaster_user_name' => 'chenchizkan',
+          'followed_at' => '2022-01-09T02:02:13.761577223Z',
+        ),
+    );
+
+    return $array["subscription"];
 });
 
 
