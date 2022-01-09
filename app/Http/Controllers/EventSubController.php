@@ -45,8 +45,8 @@ class EventSubController extends Controller
 
         $method = 'handle' . Str::studly(str_replace('.', '_', $messageType));
 
-        // Log::info('method de handleWebhook');
-        // Log::info($method);
+        Log::info('method de handleWebhook');
+        Log::info($method);
 
         EventSubReceived::dispatch($payload, $messageId, $retries, $timestamp);
 
@@ -55,8 +55,8 @@ class EventSubController extends Controller
 
             EventSubHandled::dispatch($payload, $messageId, $retries, $timestamp);
 
-            // Log::info('response de handleWebhook');
-            // Log::info($response);
+            Log::info('response de handleWebhook');
+            Log::info($response);
 
             return $response;
         }
@@ -133,10 +133,10 @@ class EventSubController extends Controller
         return $this->successMethod(); // handle the channel follow notification...
     }
 
-    public function handleChannelChannelPointsCustomRewardRedemptionAddNotification(array $payload): Response
-    {
-        Log::info('handleChannelFollowNotification');
-        Log::info($payload);
-        return $this->successMethod();
-    }
+    // public function handleChannelChannelPointsCustomRewardRedemptionAddNotification(array $payload): Response
+    // {
+    //     Log::info('handleChannelChannelPointsCustomRewardRedemptionAddNotification');
+    //     Log::info($payload);
+    //     return $this->successMethod();
+    // }
 }
