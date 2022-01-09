@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         //Obtenemos Followers
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
         //Obtenemos Subs
-        $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id])->data();
         //Obtenemos los views
         $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
 
-        dd($subs->total);
+        dd($subs[0]->total);
         return view('dashboard.main', compact('followers', 'viewcount', 'videos', 'search', 'replace'));
     })->name('dashboard');
 
