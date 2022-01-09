@@ -50,22 +50,7 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
-        $twitch = new Twitch;
 
-        // Get User by Username
-        $result = $twitch->getUsers(['login' => 'chenchizkan']);
-
-        // Check, if the query was successful
-        if ( ! $result->success()) {
-            return null;
-        }
-
-        // Shift result to get single user data
-        $user = $result->shift();
-
-        return $user;
-
-        // $subs = $twitchUser->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
     });
     Route::get('/dashboard', function () {
