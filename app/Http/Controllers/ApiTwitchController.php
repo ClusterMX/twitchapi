@@ -85,7 +85,7 @@ class ApiTwitchController extends Controller
     {
         $twitch = new Twitch;
 
-        $result = $twitch->getOAuthToken(null, GrantType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD, [
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
             'user:read:email',
             'user:edit:follows',
             'channel:read:subscriptions'
@@ -94,7 +94,7 @@ class ApiTwitchController extends Controller
         $token = $result->data()->access_token;
 
         $payload = [
-            'type' => EventSubType::CHANNEL_FOLLOW,
+            'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
             'version' => '1',
             'condition' => [
                 'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
