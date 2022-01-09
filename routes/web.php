@@ -52,25 +52,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/test-dashboard', function () {
         $twitch = new Twitch;
 
-        $result = $twitch->getOAuthAuthorizeUrl('code', [
-            'user:read:email',
-            'user:edit:follows',
-            'channel:read:subscriptions'
-        ], null, false);
+        // Get User by Username
+        $result = $twitch->getUsers(['login' => 'chenchizkan']);
 
-        $response = Http::get($result);
+        // Check, if the query was successful
+        if ( ! $result->success()) {
+            return null;
+        }
 
-        return $response;
+        // Shift result to get single user data
+        $user = $result->shift();
 
-        return $result;
+        return $user;
 
-        $token = $result->data()->access_token;
-
-        $subs = $twitchUser->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
-
-
-
-
+        // $subs = $twitchUser->withToken($token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
 
     });
     Route::get('/dashboard', function () {
