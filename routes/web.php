@@ -49,21 +49,19 @@ Route::get('/auth/twitch/redirect', function () {
 Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/test-dashboard', function () {
 
-    $subs = $twitch->withToken(Auth::usert()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
-    dd($subs);
-
-    });
     Route::get('/dashboard', function () {
         $twitch = new Twitch;
 
+        //Obtenemos Followers
         $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        // $subs = $twitch->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        //Obtenemos Subs
+        $subs = $twitch->withToken(Auth::usert()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id]);
+        //Obtenemos los views
         $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
         $viewcount = $users[0]->view_count;
+        //Obtenemos los videos
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
-
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
 
