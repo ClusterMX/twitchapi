@@ -127,14 +127,17 @@ class EventSubController extends Controller
     public function handleChannelFollowNotification(array $payload): Response
     {
         Log::info('handleChannelFollowNotification');
-        Log::info($payload);
+        //convertimos el array en un objeto
+        Log::info($payload[1]);
+
         return $this->successMethod(); // handle the channel follow notification...
     }
 
     public function handleChannelChannelPointsCustomRewardRedemptionAddNotification(array $payload): Response
     {
         Log::info('handleChannelFollowNotification');
-        Log::info($payload);
+        Log::info();
         # code del broadcast
+        return $this->successMethod();
     }
 }

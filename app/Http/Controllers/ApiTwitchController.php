@@ -21,131 +21,7 @@ use Log;
 
 class ApiTwitchController extends Controller
 {
-
-
-    public function tokenGenerator(Request $request)
-    {
-        //Se obtiene el codigo de autorización
-        $code_twitch = $request->get('code');
-        $url = "https://id.twitch.tv/oauth2/token?client_id=".env('TWITCH_CLIENT_ID')."&client_secret=".env('TWITCH_CLIENT_SECRET')."&code=".$code_twitch."&grant_type=authorization_code&redirect_uri=".env('TWITCH_REDIRECT_URI')."/token";
-        $client = new Client();
-        $res = $client->post($url);
-        $datos = json_decode($res->getBody()->getContents());
-        $token = $datos->access_token;
-
-
-        // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
-        $client = new Client();
-        $user = "https://id.twitch.tv/oauth2/validate";
-        $u = $client->get($user, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-        ]);
-
-        $datosUsuario = json_decode($u->getBody()->getContents());
-
-        $user_id = $datosUsuario->user_id;
-
-
-        // return redirect()->route('opciones', ['user_id' => $user_id, 'token' => $token]);
-
-        return view('opciones', compact('user_id', 'token'));
-
-
-
-    }
-
-
-    public function userInfo(Request $request)
-    {
-        // // Creo el request del oauth2 validate - https://id.twitch.tv/oauth2/validate y obtengo user_id
-        // $client = new Client();
-        // $user = "https://id.twitch.tv/oauth2/validate";
-        // $u = $client->get($user, [
-        //     'headers' => [
-        //         'Authorization' => 'Bearer ' . $token,
-        //     ],
-        // ]);
-
-        // $datosUsuario = json_decode($u->getBody()->getContents());
-
-        // $user_id = $datosUsuario->user_id;
-
-    }
-
-    public function subsInfo(Request $request)
-    {
-
-        $user_id = $request->get('user_id');
-        $token = $request->get('token');
-        //Se obtienen los datos de los subs
-        $subs = "https://api.twitch.tv/helix/subscriptions?broadcaster_id=".$user_id;
-
-        $client = new Client();
-        $res = $client->get($subs, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Client-Id'        => env('TWITCH_CLIENT_ID'),
-            ],
-        ]);
-
-        $datos = json_decode($res->getBody()->getContents());
-
-        $datos_subs  = $datos->data;
-
-        // return $datos_subs;
-
-        /*
-        user_name
-        tier
-        is_gift
-        gifter_name
-        */
-
-        $contador = 0;
-
-        /**
-         * Datos a guardar:
-         * broadcaster_id
-         * broadcaster_name
-         * tier
-         * user_name
-        */
-        foreach ($datos_subs as $d) {
-
-            //primero verificamos que el usuario existe o no
-
-            //Verificar cuales estan suscritos o no
-
-                //Si estan suscritos
-
-                    //si existe
-
-                        //Verificamos que haya cambios
-
-                            //Si hay cambios, se actualiza
-
-                            //Si no hay cambios, se queda igual
-
-
-
-                    //si no existe
-
-                        //Guardamos la info
-
-                //Si no está suscrito se borra de la base de datos
-
-        }
-
-        return $datos_subs;
-
-        return view('opciones.estrellas', compact('datos_subs'));
-
-    }
-
-
-     public function check(Request $request)
+    public function check(Request $request)
     {
 
         $twitch = new Twitch;
@@ -267,12 +143,6 @@ class ApiTwitchController extends Controller
     }
 
 
-    public function pruebaLog(Request $request)
-    {
-        Log::info('Log info');
-    }
-
-
     public function login()
     {
         $twitchUser = Socialite::driver('twitch')->user();
@@ -308,6 +178,25 @@ class ApiTwitchController extends Controller
         Auth::login($user);
 
         return redirect()->route('dashboard');
+    }
+
+    public function dashboard()
+    {
+        $twitch = new Twitch;
+
+        //Obtenemos Followers
+        $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
+        //Obtenemos Subs
+        $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id])->getTotal();
+        //Obtenemos los views
+        $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
+        $viewcount = $users[0]->view_count;
+        //Obtenemos los videos
+        $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
+        $search  = array('%{width}', '%{height}');
+        $replace = array('320', '180');
+
+        return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace'));
     }
 
 

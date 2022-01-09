@@ -41,8 +41,7 @@
                         <!--begin::Actions-->
                         <div class="d-flex my-4">
 
-                            <a href="https://twitch.tv/{{ Auth::user()->name }}" target="_blank" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_offer_a_deal">Ver canal</a>
+                            <a href="https://twitch.tv/{{ Auth::user()->name }}" target="_blank" class="btn btn-sm btn-primary me-3">Ver canal</a>
                         </div>
                         <!--end::Actions-->
                     </div>

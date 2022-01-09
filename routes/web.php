@@ -50,23 +50,7 @@ Route::get('/auth/twitch/callback', [ApiTwitchController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        $twitch = new Twitch;
-
-        //Obtenemos Followers
-        $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
-        //Obtenemos Subs
-        $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id])->getTotal();
-        //Obtenemos los views
-        $users = $twitch->getUsers(['id' => Auth::user()->twitch_id])->data();
-        $viewcount = $users[0]->view_count;
-        //Obtenemos los videos
-        $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
-        $search  = array('%{width}', '%{height}');
-        $replace = array('320', '180');
-
-        return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace'));
-    })->name('dashboard');
+    Route::get('/dashboard', [ApiTwitchController::class, 'dashboard'])->name('dashboard');
 
 
 });
