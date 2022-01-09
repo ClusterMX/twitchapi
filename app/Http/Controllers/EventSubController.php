@@ -7,6 +7,9 @@ use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Log;
 
+//Eventos
+use App\Events\PointsReward;
+
 class EventSubController extends BaseController
 {
     public function handleChannelFollowNotification(array $payload): Response
@@ -23,7 +26,7 @@ class EventSubController extends BaseController
         Log::info('handleChannelChannelPointsCustomRewardRedemptionAddNotification');
         Log::info($payload);
         if ($payload["event"]["reward"]["id"] == 'c8ba3aa0-a688-496b-b87a-34402443c773') {
-            Log::info("Success event");
+            event(new PointsReward());
         }
         return $this->successMethod();
     }
