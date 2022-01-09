@@ -7,6 +7,9 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use App\Events\PointsReward;
+use App\Listeners\ShowRewardNotification;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -22,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
             // add your listeners (aka providers) here
             \SocialiteProviders\Twitch\TwitchExtendSocialite::class.'@handle',
         ],
+        PointsReward::class => [
+            ShowRewardNotification::class,
+        ],
+
     ];
 
     /**
