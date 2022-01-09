@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
         $response = Http::get($result);
 
-        return $response->body();
+        return $response;
 
         return $result;
 
