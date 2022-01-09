@@ -19,11 +19,6 @@
 {{--
     <a href="" class="ui twitch button"> <i class="twitch icon"></i> Connect with twitch</a>--}}
 
-    <a href="{{ route('loginTwitch') }}" class="button login-button button--twitch" data-platform="twitch">
-        <i class="fab fa-twitch"></i>
-        <span>Continue with Twitch</span>
-    </a>
-
     <form action="{{ route('delete.event') }}">
         @csrf
         <input type="text" name="idevent">

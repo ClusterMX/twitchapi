@@ -37,6 +37,10 @@ Route::get('/example', function () {
     return view('welcome');
 });
 
+Route::get('/delet', function () {
+    return view('index');
+});
+
 Route::get('/master', function () {
 
     event(new PointsReward());
@@ -82,7 +86,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->scopes(["user:read:email", "user:edit:follows", "channel:read:subscriptions"])
+    ->scopes(["user:read:email", "user:edit:follows", "channel:read:subscriptions", "channel:read:redemptions"])
     ->redirect();
 })->name('loginTwitch');
 
