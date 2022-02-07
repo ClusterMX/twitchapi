@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventSub;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 //modelos
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 use Log;
 
 class ApiTwitchController extends Controller
@@ -103,7 +104,8 @@ class ApiTwitchController extends Controller
             ],
             'transport' => [
                 'method' => 'webhook',
-                'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
+                'callback' => env('APP_URL').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
             ]
         ];
 
@@ -131,11 +133,12 @@ class ApiTwitchController extends Controller
             'type' => EventSubType::CHANNEL_FOLLOW,
             'version' => '1',
             'condition' => [
-                'broadcaster_user_id' => '41726771', // twitch
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
             ],
             'transport' => [
                 'method' => 'webhook',
                 'callback' => config('app.url') . '/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
             ]
         ];
 
@@ -163,7 +166,7 @@ class ApiTwitchController extends Controller
 
         }else{
 
-            $password = Str::random(10);
+            $password = Hash::make(Str::random(10));
             //si no existe, guardamos el usuario en la base de datos
             $user = User::create([
                 'name' => $twitchUser->name,
@@ -197,8 +200,10 @@ class ApiTwitchController extends Controller
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
+        //Obtenemos los eventos
+        $events = EventSub::where('broadcaster_user_id', Auth::user()->twitch_id)->get();
 
-        return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace'));
+        return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace', 'events'));
     }
 
 

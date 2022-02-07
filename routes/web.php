@@ -2,19 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 use Laravel\Socialite\Facades\Socialite;
 
 use App\Events\PointsReward;
 
-use App\Http\Controllers\EventSubController;
 use App\Http\Controllers\ApiTwitchController;
-
+use Illuminate\Support\Facades\Log;
 use romanzipp\Twitch\Twitch;
-use romanzipp\Twitch\Enums\GrantType;
-use romanzipp\Twitch\Enums\EventSubType;
 
-use Illuminate\Support\Facades\Http;
 
 
 
@@ -31,7 +26,7 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login');
 
 Route::get('/example', function () {
     return view('welcome');
@@ -96,7 +91,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [ApiTwitchController::class, 'dashboard'])->name('dashboard');
 
-
     //Rutas prueba
     Route::get('/evento', [ApiTwitchController::class, 'eventoPrueba']);
     Route::get('/evento-check', [ApiTwitchController::class, 'check']);
@@ -114,7 +108,10 @@ Route::get('/twitch/check', [ApiTwitchController::class, 'check']);
 
 Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('delete.event');
 
-Route::get('/pruebalog', [ApiTwitchController::class, 'pruebaLog']);
+
+Route::get('pruebalog', function () {
+    Log::error("Info");
+});
 
 
 

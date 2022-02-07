@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
 use Symfony\Component\HttpFoundation\Response;
-use Log;
 
 //Eventos
 use App\Events\PointsReward;
+use Illuminate\Support\Facades\Log;
 
 class EventSubController extends BaseController
 {

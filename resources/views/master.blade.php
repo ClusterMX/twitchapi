@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <!--begin::Head-->
 
 <head>
-    <base href="../../">
-    <title>Orion</title>
+    <title>Nebula Stream</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />

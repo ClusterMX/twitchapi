@@ -130,57 +130,86 @@
                 <!--begin::Body-->
                 <div class="card-body pt-5">
                     <!--begin::Timeline-->
-                    <div class="timeline-label">
-                        <!--begin::Item-->
-                        <div class="timeline-item">
-                            <!--begin::Label-->
-                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Sub</div>
-                            <!--end::Label-->
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-warning fs-1"></i>
-                            </div>
-                            <!--end::Badge-->
-                            <!--begin::Text-->
-                            <div class="fw-mormal timeline-content ps-3">Outlines keep you honest. And keep
-                                structure</div>
-                            <!--end::Text-->
+                    @if ($events->count() == 0)
+                    <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                        <div class="flex-grow-1 me-2">
+                            <span class="text-muted fw-bold d-block pt-1">Aun no tenemos datos que mostrarte, prende stream y vuelve para volver a revisar :)</span>
                         </div>
-                        <!--end::Item-->
+                        {{-- <span class="badge badge-light-success fs-8 fw-bolder my-2">Approved</span> --}}
+                    </div>
+                    @else
+
+
+                    <div class="timeline-label">
+                        @forelse ($events as $item)
                         <!--begin::Item-->
                         <div class="timeline-item">
-                            <!--begin::Label-->
+                            @if ($item->type == 'channel.follow')
+
                             <div class="timeline-label fw-bolder text-gray-800 fs-8">Follow</div>
-                            <!--end::Label-->
-                            <!--begin::Badge-->
                             <div class="timeline-badge">
                                 <i class="fa fa-genderless text-success fs-1"></i>
                             </div>
-                            <!--end::Badge-->
-                            <!--begin::Content-->
-                            <div class="timeline-content d-flex">
-                                <span class="fw-bolder text-gray-800 ps-3">AEOL meeting</span>
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> te ha seguido
                             </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="timeline-item">
-                            <!--begin::Label-->
-                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Cheer</div>
-                            <!--end::Label-->
-                            <!--begin::Badge-->
+
+                            @elseif ($item->type == 'channel.subscribe')
+                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Sub</div>
+                            <div class="timeline-badge">
+                                <i class="fa fa-genderless text-primary fs-1"></i>
+                            </div>
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> se ha suscrito a tu canal
+                            </div>
+                            @elseif ($item->type == 'channel.subscription.gift')
+                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Gift</div>
                             <div class="timeline-badge">
                                 <i class="fa fa-genderless text-danger fs-1"></i>
                             </div>
-                            <!--end::Badge-->
-                            <!--begin::Desc-->
-                            <div class="timeline-content fw-bolder text-gray-800 ps-3">Make deposit
-                                <a href="#" class="text-primary">USD 700</a>. to ESL
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> ha regalado {{ $item->total }} subs, lleva un total de {{ $item->cumulative_total }} subs regaladas
                             </div>
-                            <!--end::Desc-->
+                            @elseif ($item->type == 'channel.subscription.message')
+                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Resub</div>
+                            <div class="timeline-badge">
+                                <i class="fa fa-genderless text-primary fs-1"></i>
+                            </div>
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> se ha resuscrito
+                            </div>
+                            @elseif ($item->type == 'channel.cheer')
+                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Cheer</div>
+                            <div class="timeline-badge">
+                                <i class="fa fa-genderless text-white fs-1"></i>
+                            </div>
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> ha dado {{ $item->bits }} bits: "<i class="text-white-50">{{ $item->message }}</i>"
+                            </div>
+                            @elseif ($item->type == 'channel.raid')
+                            <div class="timeline-label fw-bolder text-gray-800 fs-8">Raid</div>
+                            <div class="timeline-badge">
+                                <i class="fa fa-genderless text-warning fs-1"></i>
+                            </div>
+                            <div class="fw-mormal timeline-content ps-3">
+                                <a href="https://twitch.tv/{{ $item->user_name }}" target="_blank">{{ $item->user_name }}</a> ha hecho una raid de {{ $item->viewers }} personas
+                            </div>
+
+                            @endif
+
+
+
                         </div>
+                        <!--end::Item-->
+
+                        @empty
+
+                        @endforelse
+
                     </div>
+
+                    @endif
+
                     <!--end::Timeline-->
                 </div>
                 <!--end: Card Body-->
@@ -199,7 +228,7 @@
                 <!--begin::Body-->
                 <div class="card-body pt-3">
                     <!--begin::Item-->
-                    @foreach ($videos as $video)
+                    @forelse ($videos as $video)
                     <div class="d-flex align-items-sm-center mb-7">
                         <!--begin::Symbol-->
                         <div class="symbol symbol-60px symbol-2by3 me-4">
@@ -218,7 +247,19 @@
                         </div>
                         <!--end::Title-->
                     </div>
-                    @endforeach
+
+                    @empty
+                    <div class="d-flex align-items-sm-center mb-7">
+                        <!--begin::Title-->
+                        <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                            <div class="flex-grow-1 me-2">
+                                <span class="text-muted fw-bold d-block pt-1">Al parecer no has hecho stream en un largo tiempo :(</span>
+                            </div>
+                            {{-- <span class="badge badge-light-success fs-8 fw-bolder my-2">Approved</span> --}}
+                        </div>
+                        <!--end::Title-->
+                    </div>
+                    @endforelse
 
                     <!--end::Item-->
                 </div>

@@ -13,7 +13,7 @@
         <giftexample-component></giftexample-component>
     </div>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://raw.githubusercontent.com/chenchogalvan/twitchapi/main/public/js/app.js"></script>
 
 
 </body>
