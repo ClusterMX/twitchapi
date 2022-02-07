@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers;
 
 use romanzipp\Twitch\Http\Controllers\EventSubController as BaseController;
 use Symfony\Component\HttpFoundation\Response;
 
 //Eventos
 use App\Events\PointsReward;
+use App\Models\EventSub;
 use Illuminate\Support\Facades\Log;
 
 class EventSubController extends BaseController
@@ -17,6 +17,16 @@ class EventSubController extends BaseController
         Log::info('handleChannelFollowNotification');
         //convertimos el array en un objeto
         Log::info($payload["event"]);
+
+        $evento = new EventSub;
+        $evento->event_id = $payload["subscription"]["id"];
+        $evento->broadcaster_user_id = $payload["event"]["broadcaster_user_login"];
+        $evento->broadcaster_user_name = $payload["event"]["broadcaster_user_name"];
+        $evento->type = $payload["subscription"]["type"];
+        $evento->user_id = $payload["event"]["user_id"];
+        $evento->user_name = $payload["event"]["user_name"];
+        $evento->followed_at = $payload["event"]["user_login"];
+        $evento->save();
 
         return $this->successMethod(); // handle the channel follow notification...
     }
