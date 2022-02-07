@@ -34,6 +34,7 @@ class EventSubController extends Controller
      */
     public function handleWebhook(Request $request): Response
     {
+        Log::info("Llegamos aquí");
         $payload = json_decode($request->getContent(), true);
 
         $messageType = $request->header('twitch-eventsub-message-type');
