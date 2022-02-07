@@ -303,7 +303,7 @@ class ApiTwitchController extends Controller
 
         $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
-        return $result;
+         dd($result);
     }
 
     public function EventoSubMensaje()
