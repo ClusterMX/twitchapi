@@ -181,6 +181,15 @@ class ApiTwitchController extends Controller
 
         Auth::login($user);
 
+        //Realiza la suscripción a los eventos
+        $this->EventoFollow();
+        $this->EventoSubscription();
+        $this->EventoSubMensaje();
+        $this->EventoSubGif();
+        $this->EventoCheer();
+        $this->EventoRaid();
+        $this->EventoHost();
+
         return redirect()->route('dashboard');
     }
 
@@ -202,13 +211,221 @@ class ApiTwitchController extends Controller
 
         //Obtenemos los eventos
         $events = EventSub::where('broadcaster_user_id', Auth::user()->twitch_id)->get();
-
-
-
         return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace', 'events'));
     }
 
 
+
+    //Eventos
+
+    public function EventoFollow()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'user:read:email',
+            'user:edit:follows',
+            'channel:read:subscriptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_FOLLOW,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' => config('app.url') . '/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoSubscription()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_SUBSCRIBE,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoSubGif()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_SUBSCRIPTION_GIFT,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoSubMensaje()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_SUBSCRIPTION_MESSAGE,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoCheer()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_CHEER,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoRaid()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_RAID,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
+
+    public function EventoHost()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'channel:read:subscriptions',
+            'user:read:email',
+            'channel:manage:redemptions',
+            'channel:read:redemptions'
+        ]);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_HOST,
+            'version' => '1',
+            'condition' => [
+                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+    }
 
 
 
