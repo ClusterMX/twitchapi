@@ -203,7 +203,6 @@ class ApiTwitchController extends Controller
         //Obtenemos los eventos
         $events = EventSub::where('broadcaster_user_id', Auth::user()->twitch_id)->get();
 
-        return $events;
 
 
         return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace', 'events'));
