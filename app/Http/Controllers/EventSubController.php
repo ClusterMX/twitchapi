@@ -21,7 +21,7 @@ class EventSubController extends BaseController
 
         $evento = new EventSub;
         $evento->event_id = $payload["subscription"]["id"];
-        $evento->broadcaster_user_id = $payload["event"]["broadcaster_user_login"];
+        $evento->broadcaster_user_id = $payload["event"]["broadcaster_user_id"];
         $evento->broadcaster_user_name = $payload["event"]["broadcaster_user_name"];
         $evento->type = $payload["subscription"]["type"];
         $evento->user_id = $payload["event"]["user_id"];

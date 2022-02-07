@@ -199,8 +199,11 @@ class ApiTwitchController extends Controller
         $videos = $twitch->getVideos(['user_id' => Auth::user()->twitch_id, 'type' => 'archive'])->data();
         $search  = array('%{width}', '%{height}');
         $replace = array('320', '180');
+
         //Obtenemos los eventos
         $events = EventSub::where('broadcaster_user_id', Auth::user()->twitch_id)->get();
+
+        return $events;
 
 
         return view('dashboard.main', compact('followers', 'viewcount', 'subs', 'videos', 'search', 'replace', 'events'));
