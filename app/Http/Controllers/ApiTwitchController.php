@@ -282,10 +282,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
-            'channel:read:subscriptions',
-            'user:read:email',
-            'channel:manage:redemptions',
-            'channel:read:redemptions'
+            'channel:read:subscriptions'
         ]);
 
 
@@ -342,10 +339,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
-            'channel:read:subscriptions',
-            'user:read:email',
-            'channel:manage:redemptions',
-            'channel:read:redemptions'
+            'bits:read'
         ]);
 
 

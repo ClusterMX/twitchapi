@@ -102,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
 //////PRUEBAS
 
 
-Route::get('/twitch/test', [ApiTwitchController::class, 'test']);
+Route::get('/twitch/test', [ApiTwitchController::class, 'EventoSubGif']);
 
 Route::get('/twitch/check', [ApiTwitchController::class, 'check']);
 
