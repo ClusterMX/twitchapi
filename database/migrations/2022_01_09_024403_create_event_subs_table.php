@@ -25,7 +25,7 @@ class CreateEventSubsTable extends Migration
             $table->string('user_name')->nullable();
 
             //Follower
-            $table->dateTime('followed_at')->nullable();
+            $table->string('followed_at')->nullable();
 
             //sub & gif sub
             $table->string('tier')->nullable();

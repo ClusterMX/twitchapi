@@ -26,7 +26,7 @@ class EventSubController extends BaseController
         $evento->type = $payload["subscription"]["type"];
         $evento->user_id = $payload["event"]["user_id"];
         $evento->user_name = $payload["event"]["user_name"];
-        $evento->followed_at = Carbon::parse($payload["event"]["followed_at"])->format('Y-m-d H:i');
+        $evento->followed_at = $payload["event"]["followed_at"];
         $evento->save();
 
         return $this->successMethod(); // handle the channel follow notification...

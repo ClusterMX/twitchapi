@@ -110,7 +110,7 @@ Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('dele
 
 
 Route::get('pruebalog', function () {
-    Log::error("Info");
+    // Log::error("Info");
 });
 
 
