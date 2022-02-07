@@ -104,7 +104,7 @@ class ApiTwitchController extends Controller
             ],
             'transport' => [
                 'method' => 'webhook',
-                'callback' => env('APP_URL').'/api/twitch/eventsub/webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
                 'secret' => 'chenchosecret2510',
             ]
         ];
@@ -125,7 +125,6 @@ class ApiTwitchController extends Controller
             'channel:read:subscriptions'
         ]);
 
-        return $result->data();
 
         $token = $result->data()->access_token;
 
