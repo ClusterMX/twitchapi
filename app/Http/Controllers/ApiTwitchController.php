@@ -303,7 +303,6 @@ class ApiTwitchController extends Controller
 
         $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
-         dd($result);
     }
 
     public function EventoSubMensaje()
@@ -341,33 +340,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
 
         $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
-            'bits:read'
-        ]);
-
-
-        $token = $result->data()->access_token;
-
-        $payload = [
-            'type' => EventSubType::CHANNEL_CHEER,
-            'version' => '1',
-            'condition' => [
-                'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
-            ],
-            'transport' => [
-                'method' => 'webhook',
-                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
-                'secret' => 'chenchosecret2510',
-            ]
-        ];
-
-        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
-    }
-
-    public function EventoRaid()
-    {
-        $twitch = new Twitch;
-
-        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, [
+            'bits:read',
             'channel:read:subscriptions',
             'user:read:email',
             'channel:manage:redemptions',
@@ -377,8 +350,9 @@ class ApiTwitchController extends Controller
 
         $token = $result->data()->access_token;
 
+
         $payload = [
-            'type' => EventSubType::CHANNEL_RAID,
+            'type' => 'channel.cheer',
             'version' => '1',
             'condition' => [
                 'broadcaster_user_id' => Auth::user()->twitch_id, // twitch
@@ -391,6 +365,33 @@ class ApiTwitchController extends Controller
         ];
 
         $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
+    }
+
+    public function EventoRaid()
+    {
+        $twitch = new Twitch;
+
+        $result = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, []);
+
+
+        $token = $result->data()->access_token;
+
+        $payload = [
+            'type' => EventSubType::CHANNEL_RAID,
+            'version' => '1',
+            'condition' => [
+                'to_broadcaster_user_id' => Auth::user()->twitch_id, // twitch
+            ],
+            'transport' => [
+                'method' => 'webhook',
+                'callback' =>config('app.url').'/api/twitch/eventsub/webhook',
+                'secret' => 'chenchosecret2510',
+            ]
+        ];
+
+        $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
     }
 
     public function EventoHost()
@@ -421,6 +422,8 @@ class ApiTwitchController extends Controller
         ];
 
         $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
+
+
     }
 
 

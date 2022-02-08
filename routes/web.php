@@ -8,6 +8,7 @@ use App\Events\PointsReward;
 
 use App\Http\Controllers\ApiTwitchController;
 use Illuminate\Support\Facades\Log;
+use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
 
 
@@ -81,7 +82,7 @@ Route::get('/master', function () {
 
 Route::get('/auth/twitch/redirect', function () {
     return Socialite::driver('twitch')
-    ->scopes(["user:read:email", "user:edit:follows", "channel:read:subscriptions", "channel:read:redemptions"])
+    ->scopes(["user:read:email", "user:edit:follows", "channel:read:subscriptions", "channel:read:redemptions", "bits:read"])
     ->redirect();
 })->name('loginTwitch');
 
@@ -102,7 +103,7 @@ Route::middleware(['auth'])->group(function () {
 //////PRUEBAS
 
 
-Route::get('/twitch/test', [ApiTwitchController::class, 'EventoSubGif']);
+Route::get('/twitch/test', [ApiTwitchController::class, 'EventoHost']);
 
 Route::get('/twitch/check', [ApiTwitchController::class, 'check']);
 
@@ -181,14 +182,19 @@ Route::get('pruebalog', function () {
 // );
 
 Route::get('/lista', function () {
-    $user = Socialite::driver('twitch')->user();
     $twitch = new Twitch;
+    //$user = Socialite::driver('twitch')->user();
 
-    $result = $twitch->getEventSubs(['status' => 'notification_failures_exceeded']);
+    $resultado = $twitch->getOAuthToken(null, GrantType::CLIENT_CREDENTIALS, ['channel:read:subscriptions', 'user:read:email', 'channel:manage:redemptions', 'channel:read:redemptions']);
 
-    foreach ($result->data() as $item) {
+    $access_token = $resultado->data()->access_token;
+
+    $result = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled']);
+    $second_result = $twitch->withToken($access_token)->getEventSubs(['status' => 'enabled'], $result->next());
+
+    foreach ($second_result->data() as $item) {
         // process the subscription
-        echo $item.'<br>';
+        echo $item->type."<br>";
     }
 });
 
