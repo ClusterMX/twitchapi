@@ -7,9 +7,8 @@
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
-        "ghostzero/tmi": "^2.3",
-        "ghostzero/tmi-cluster": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "idevelopthings/laravel-twitch-irc": "dev-main",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -44,8 +43,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi",
-            "@php artisan tmi-cluster:publish --ansi"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

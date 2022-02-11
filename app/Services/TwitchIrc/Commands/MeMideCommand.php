@@ -1,13 +1,12 @@
 <?php
 namespace App\Services\TwitchIrc\Commands;
 
-use Amp\Promise;
 use TwitchIrc\Bot\Command\BaseCommand;
 
 class MeMideCommand extends BaseCommand
 {
     public function identifier(): string {
-        return "memide";
+        return "medir";
     }
 
     public function aliases(): array {
@@ -19,7 +18,7 @@ class MeMideCommand extends BaseCommand
     }
 
     public function handle(): void {
-        $this->reply("Hola");
+        $this->chatUser()->getUsername();
     }
 
 }

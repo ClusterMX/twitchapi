@@ -13,6 +13,10 @@ use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
 
 
+use GhostZero\Tmi\Client;
+use GhostZero\Tmi\ClientOptions;
+use GhostZero\Tmi\Events\Irc\MessageEvent;
+
 
 
 
@@ -114,75 +118,12 @@ Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('dele
 
 Route::get('pruebalog', function () {
     // Log::error("Info");
-    return Storage::disk('twitch-irc-commands')->allFiles();
+
 });
 
 
 
-// Route::get('/auth/twitch/callback', function () {
-//     // $user = Socialite::driver('twitch')->user();
 
-//     // $user->id;
-
-
-//     // Get User by Username
-//     // $result = $twitch->getUsers(['login' => $user->nickname]);
-
-//     // Check, if the query was successful
-//     // if ( ! $result->success()) {
-//     //     return null;
-//     // }
-
-//     // Shift result to get single user data
-//     // $data = $result->shift();
-
-//     // return $data;
-
-//     // $user->token
-
-
-//     //crear evento
-
-//     // $twitch = new Twitch;
-
-//     // $result = $twitch->subscribeEventSub([], [
-//     //     'type' => EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD,
-//     //     'version' => '1',
-//     //     'condition' => [
-//     //         'broadcaster_user_id' => $user->id,
-//     //     ],
-//     //     'transport' => [
-//     //         'method' => 'webhook',
-//     //         'callback' => 'https://twitchapi.clustermx.com/api/twitch/eventsub/webhook',
-//     //         // 'secret' => 'chenchosecret',
-//     //     ]
-//     // ]);
-
-
-
-//     // $result = $twitch->getEventSubs(['status' => 'enabled']);
-
-//     // foreach ($result->data() as $item) {
-//     //     // process the subscription
-//     //     echo $item.'<br>';
-//     // }
-
-//     // $result = $twitch->unsubscribeEventSub([
-//     //     'id' => 'e8282f98-41a7-46e7-b9d2-a6d721e973dd'
-//     // ]);
-
-
-//     // return $result->data();
-
-//     // dd($result);
-// });
-
-
-
-// Route::get(
-//     '/notificación',
-//     [EventSubController::class, 'handleNotification']
-// );
 
 Route::get('/lista', function () {
     $twitch = new Twitch;
@@ -224,15 +165,6 @@ Route::get('/opciones', function (Request $request) {
 
 Route::post('/estrellas', [ApiTwitchController::class, 'subsInfo'])->name('estrellas');
 
-//Se utiliza para crear el token y poder acceder
-// Route::get('/success', function (Request $request) {
-
-
-//     return redirect()->route('board', [$datos_subs]);
-
-// });
-
-
 //Se obtiene el codigo generado
 Route::get('/board', function (Request $request) {
 
@@ -245,6 +177,6 @@ Route::get('/board', function (Request $request) {
 
 
 Route::get('/bot', function (){
-    return view('assets.aside');
+    return view('bot');
 });
 

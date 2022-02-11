@@ -15,7 +15,7 @@
                 username: 'chenchizkanbot',
                 password: 'oauth:azr8oek1cmwzdavsk80tqfumbwcs1i'
             },
-            channels: [ 'chenchizkan' ]
+            channels: [ 'mv22_', 'chenchizkan' ]
         });
 
         client.connect();
@@ -28,6 +28,12 @@
                 // "@alca, heya!"
                 client.say(channel, `@${tags.username}, heya!`);
             }
+
+            if (channel.toLowerCase() === "#chenchizkan") {
+                console.log("canal chencho")
+            }
+
+
         });
     </script>
 </body>
