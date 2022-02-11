@@ -245,6 +245,6 @@ Route::get('/board', function (Request $request) {
 
 
 Route::get('/bot', function (){
-    return view('bot');
+    return view('assets.aside');
 });
 
