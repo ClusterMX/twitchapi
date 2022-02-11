@@ -8,8 +8,10 @@ use App\Events\PointsReward;
 
 use App\Http\Controllers\ApiTwitchController;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use romanzipp\Twitch\Enums\GrantType;
 use romanzipp\Twitch\Twitch;
+
 
 
 
@@ -112,6 +114,7 @@ Route::get('/twitch/delete', [ApiTwitchController::class, 'delete'])->name('dele
 
 Route::get('pruebalog', function () {
     // Log::error("Info");
+    return Storage::disk('twitch-irc-commands')->allFiles();
 });
 
 
@@ -238,4 +241,10 @@ Route::get('/board', function (Request $request) {
     return $datos_subs[0]->user_name;
 
 })->name('board');
+
+
+
+Route::get('/bot', function (){
+    return view('bot');
+});
 

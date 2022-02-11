@@ -52,6 +52,12 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+        'twitch_bot' => [
+             'driver'     => 'local',
+             'root'       => app_path('Services/TwitchIrc/Commands'),
+             'url'        => null,
+             'visibility' => 'private',
+        ],
 
     ],
 

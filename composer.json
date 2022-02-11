@@ -6,11 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.3",
-        "laravel/framework": "^8.40",
+        "ghostzero/tmi": "^2.3",
+        "ghostzero/tmi-cluster": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "idevelopthings/laravel-twitch-irc": "dev-main",
+        "laravel/framework": "^8.75",
+        "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^7.0",
         "romanzipp/laravel-twitch": "^4.3",
         "socialiteproviders/twitch": "^5.3"
@@ -19,9 +23,9 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^5.10",
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
@@ -60,6 +64,7 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+
     "minimum-stability": "dev",
     "prefer-stable": true
 }

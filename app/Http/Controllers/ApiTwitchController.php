@@ -198,7 +198,8 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
 
         //Obtenemos Followers
-        $followers = $twitch->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
+        $followers = $twitch->withToken(Auth::user()->twitch_token)->getUsersFollows(['from_id' => Auth::user()->twitch_id])->getTotal();
+
         //Obtenemos Subs
         $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id])->getTotal();
         //Obtenemos los views
