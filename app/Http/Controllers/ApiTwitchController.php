@@ -32,7 +32,6 @@ class ApiTwitchController extends Controller
 
         $access_token = $resultado->data()->access_token;
 
-        // dd($access_token);
 
         $payload = [
             'type' => EventSubType::CHANNEL_FOLLOW,
@@ -65,14 +64,23 @@ class ApiTwitchController extends Controller
         // $result = $twitch->withToken($token)->subscribeEventSub([], $payload);
 
         // dd($payload, $result);
-        dd($pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
+        dd($access_token, $pending, $failed, $enabled, $exceeded, $urevoked, $revoked);
     }
 
     public function delete(Request $request)
     {
+
         $evento  = $request->get('idevent');
         //Elimina el evento
         $twitch = new Twitch;
+
+        // $result = $twitch->getEventSubs(['status' => 'webhook_callback_verification_failed']);
+
+        // foreach ($result->data() as $evento) {
+        //     $twitch->unsubscribeEventSub([
+        //         'id' => $evento->id
+        //     ]);
+        // }
 
         $twitch->unsubscribeEventSub([
             'id' => $evento
@@ -198,7 +206,7 @@ class ApiTwitchController extends Controller
         $twitch = new Twitch;
 
         //Obtenemos Followers
-        $followers = $twitch->withToken(Auth::user()->twitch_token)->getUsersFollows(['from_id' => Auth::user()->twitch_id])->getTotal();
+        $followers = $twitch->withToken(Auth::user()->twitch_token)->getUsersFollows(['to_id' => Auth::user()->twitch_id])->getTotal();
 
         //Obtenemos Subs
         $subs = $twitch->withToken(Auth::user()->twitch_token)->getSubscriptions(['broadcaster_id' => Auth::user()->twitch_id])->getTotal();
